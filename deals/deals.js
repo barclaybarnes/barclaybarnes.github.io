@@ -1,102 +1,104 @@
 // Pickup deal data. PICKUP ONLY: never add delivery-only offers here.
-// value = rough share of a typical order you save (0 to 1). BOGO on one item ~0.5.
+// item = EXACTLY what the discount or free item is (e.g. "Bag of chips", "Second footlong, half off", "Whole order of $20+").
+// save = estimated dollars saved on that item at menu price. Ranking uses save ($8+ = full marks).
+// value = old fallback (0 to 1), used at half weight only when save is missing.
 // windows: when the deal runs. days: 0=Sun..6=Sat. from/to: local hour (24h). No windows = any time.
 // verified: false when the terms came from a headline or summary and need checking in the app.
 window.DEALS_CHECKED = "2026-11-18";
 window.DEALS = [
   {
-    id: "shakeshack-bogo", chain: "Shake Shack", cuisine: "burgers",
+    id: "shakeshack-bogo", item: "Single ShackBurger (second one free)", save: 7.0, chain: "Shake Shack", cuisine: "burgers",
     title: "Buy a single ShackBurger, get a second one free",
     code: "BOGOSHACK", how: "Shake Shack app, website or kiosk",
     value: 0.5, end: "2026-11-30", verified: true,
     source: "https://www.mealslash.com/deals/this-week"
   },
   {
-    id: "shakeshack-sunday", chain: "Shake Shack", cuisine: "chicken",
+    id: "shakeshack-sunday", item: "Chicken Shack, single ShackBurger or 6-piece chicken bites, up to $9.99", save: 8.5, chain: "Shake Shack", cuisine: "chicken",
     title: "Chicken Sundays: free Chicken Shack, ShackBurger or 6 chicken bites with $10+",
     code: "SHACKSUNDAY", how: "App, website or kiosk. Not drive-thru. Some sites list the code as CHICKENSUNDAY",
     value: 0.5, end: "2026-12-27", windows: [{ days: [0] }], verified: true,
     source: "https://sporked.com/article/every-fast-food-deal-this-week-9/"
   },
   {
-    id: "subway-happyhour", chain: "Subway", cuisine: "subs",
+    id: "subway-happyhour", item: "Second footlong, half off", save: 5.0, chain: "Subway", cuisine: "subs",
     title: "Second footlong 50% off",
     code: "BOGO50", how: "Subway app or website. 4 PM to close on weekdays, all day on weekends",
     value: 0.25, windows: [{ days: [1, 2, 3, 4, 5], from: 16, to: 24 }, { days: [0, 6] }], verified: true,
     source: "https://sporked.com/article/every-fast-food-deal-this-week-9/"
   },
   {
-    id: "subway-fritos", chain: "Subway", cuisine: "subs",
+    id: "subway-fritos", item: "Footlong Fritos Enchilada sub, 40% off", save: 4.4, chain: "Subway", cuisine: "subs",
     title: "40% off a Footlong Fritos Enchilada sub",
     how: "Subway app, Sub Club members. Limited time, no end date listed",
     value: 0.4, verified: false,
     source: "https://sporked.com/article/every-fast-food-deal-this-week-9/"
   },
   {
-    id: "wendys-daves", chain: "Wendy's", cuisine: "burgers",
+    id: "wendys-daves", item: "Dave's Single, half off", save: 3.5, chain: "Wendy's", cuisine: "burgers",
     title: "Half off a Dave's Single with any purchase",
     code: "FOXBIGNOON", how: "Wendy's app, Rewards members, once a week",
     value: 0.3, end: "2026-12-04", verified: true,
     source: "https://sporked.com/article/every-fast-food-deal-this-week-9/"
   },
   {
-    id: "moes-dipper", chain: "Moe's", cuisine: "mexican",
+    id: "moes-dipper", item: "Birria Grilled Burrito Dipper", save: 5.0, chain: "Moe's", cuisine: "mexican",
     title: "Free Birria Grilled Burrito Dipper with any purchase",
     how: "Moe's app, Moe Rewards members",
     value: 0.4, end: "2026-11-22", verified: true,
     source: "https://www.mealslash.com/deals/this-week"
   },
   {
-    id: "popeyes-wings", chain: "Popeyes", cuisine: "chicken",
+    id: "popeyes-wings", item: "6-piece wings", save: 7.5, chain: "Popeyes", cuisine: "chicken",
     title: "Wing Mondays: free 6-piece wings with a $10+ order",
     how: "Popeyes app or website",
     value: 0.45, end: "2027-01-04", windows: [{ days: [1] }], verified: true,
     source: "https://sporked.com/article/every-fast-food-deal-this-week-9/"
   },
   {
-    id: "popeyes-20", chain: "Popeyes", cuisine: "chicken",
+    id: "popeyes-20", item: "Bundle: 3 proteins and 2 regular sides", save: 4.0, chain: "Popeyes", cuisine: "chicken",
     title: "3 proteins and 2 regular sides for $20",
     how: "Popeyes app or website. No end date listed",
     value: 0.2, verified: false,
     source: "https://sporked.com/article/every-fast-food-deal-this-week-9/"
   },
   {
-    id: "mcd-fries", chain: "McDonald's", cuisine: "burgers",
+    id: "mcd-fries", item: "Medium fries", save: 3.3, chain: "McDonald's", cuisine: "burgers",
     title: "Free medium fries with a $1+ purchase, once a week",
     how: "McDonald's app, Rewards. Not valid on McDelivery",
     value: 0.4, end: "2026-12-31", verified: false,
     source: "https://dealsfinders.com/fastfood-coupons/"
   },
   {
-    id: "bk-advent", chain: "Burger King", cuisine: "burgers",
+    id: "bk-advent", item: "Changes daily, shown only in the app", chain: "Burger King", cuisine: "burgers",
     title: "Holiday advent calendar: a new app deal each day",
     how: "Burger King app. Today's offer is only shown in the app",
     value: 0.3, end: "2026-11-20", verified: false,
     source: "https://www.mealslash.com/deals/this-week"
   },
   {
-    id: "kk-thanksgiving", chain: "Krispy Kreme", cuisine: "dessert",
+    id: "kk-thanksgiving", item: "One Thanksgiving doughnut", save: 2.0, chain: "Krispy Kreme", cuisine: "dessert",
     title: "Free Thanksgiving doughnut with any purchase",
     how: "In shop. Terms not confirmed",
     value: 0.3, start: "2026-11-17", end: "2026-11-23", verified: false,
     source: "https://dealsfinders.com/fastfood-coupons/"
   },
   {
-    id: "jm-chips", chain: "Jersey Mike's", cuisine: "subs",
+    id: "jm-chips", item: "Chips and a regular drink", save: 4.0, chain: "Jersey Mike's", cuisine: "subs",
     title: "Free chips and a regular drink with a Regular or Giant sub",
     how: "Jersey Mike's app, Offers tab. Check it is in your account",
     value: 0.25, end: "2027-02-28", verified: false,
     source: "https://dealsfinders.com/fastfood-coupons/"
   },
   {
-    id: "zaxbys-5off", chain: "Zaxby's", cuisine: "chicken",
+    id: "zaxbys-5off", item: "Whole order of $20+", save: 5.0, chain: "Zaxby's", cuisine: "chicken",
     title: "$5 off $20+ (rotating app coupon)",
     how: "Zaxby's app, Offers tab. Rotates, so it may not be live",
     value: 0.25, verified: false,
     source: "https://dealsfinders.com/fastfood-coupons/"
   },
   {
-    id: "hardees-goodness", chain: "Hardee's", cuisine: "burgers",
+    id: "hardees-goodness", item: "Whole order of $10+", save: 5.0, chain: "Hardee's", cuisine: "burgers",
     title: "$5 off $10+ with the Goodness Pass",
     how: "Hardee's app",
     value: 0.5, start: "2026-12-01", verified: true,
@@ -174,7 +176,7 @@ window.DEALS = [
     source: "https://www.ubereats.com/feed?diningMode=PICKUP"
   },
   {
-    id: "ue-jimmyjohns-bogo", chain: "Jimmy John's", cuisine: "subs",
+    id: "ue-jimmyjohns-bogo", item: "Chips only (bag of chips), not sandwiches", save: 2.0, chain: "Jimmy John's", cuisine: "subs",
     title: "Buy 1, get 1 free on Uber Eats pickup",
     how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
     value: 0.5, end: "2026-11-20", verified: false,
