@@ -203,18 +203,21 @@ async function loadStores(){
   status("Finding restaurants near you…");render();
   // Ask only for places whose name/brand matches a chain we track, or Mediterranean cuisine: much faster than every restaurant.
   const names=Object.values(CHAINS).map(c=>c.re.source).concat([MED_RE.name.source])
-    .join("|").replace(/\\b|\^|\$/g,"").replace(/'\?/g,".?").replace(/"/g,"");
+    .join("|").replace(/\\b|\^|\$/g,"").replace(/'\?/g,".?").replace(/"/g,"")
+    .replace(/\[[^\]]*[^\x00-\x7f][^\]]*\]/g,".").replace(/[^\x00-\x7f]/g,".");
   const around=`(around:${r},${st.loc.lat.toFixed(5)},${st.loc.lng.toFixed(5)})`;
   const am='["amenity"~"fast_food|restaurant|cafe|ice_cream"]';
-  const q=`[out:json][timeout:25];(nwr${am}["name"~"${names}",i]${around};nwr${am}["brand"~"${names}",i]${around};nwr${am}["cuisine"~"mediterranean|greek|lebanese|middle_eastern|turkish|falafel|kebab|persian|shawarma",i]${around};);out center tags 3000;`;
+  const q=`[out:json][timeout:25];(nwr${am}["name"~"${names}",i]${around};nwr${am}["brand"~"${names}",i]${around};nwr${am}["cuisine"~"mediterranean|greek|lebanese|middle_eastern|turkish|falafel|kebab|persian|shawarma",i]${around};);out center tags;`;
+  const qBroad=`[out:json][timeout:40];nwr${am}${around};out center tags;`;
   const eps=["https://overpass-api.de/api/interpreter","https://overpass.private.coffee/api/interpreter","https://maps.mail.ru/osm/tools/overpass/api/interpreter"];
+  const tries=eps.map(ep=>[ep,q]).concat([[eps[0],qBroad],[eps[1],qBroad]]);
   let lastErr="";
-  for(const ep of eps){
+  for(const[ep,qq] of tries){
     try{
       const ctl=new AbortController();const tm=setTimeout(()=>ctl.abort(),30000);
-      const res=await fetch(ep,{method:"POST",body:"data="+encodeURIComponent(q),headers:{"Content-Type":"application/x-www-form-urlencoded"},signal:ctl.signal});
+      const res=await fetch(ep,{method:"POST",body:"data="+encodeURIComponent(qq),headers:{"Content-Type":"application/x-www-form-urlencoded"},signal:ctl.signal});
       clearTimeout(tm);
-      if(!res.ok)throw new Error("HTTP "+res.status);
+      if(!res.ok){const t=await res.text().catch(()=>"");throw new Error("HTTP "+res.status+" "+((t.match(/Error:[^<]{0,80}/)||[""])[0]))}
       const j=await res.json();
       if(j.remark&&/error|timed out|runtime/i.test(j.remark))throw new Error(j.remark);
       const found=parse(j.elements||[]);
