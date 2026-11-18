@@ -104,103 +104,96 @@ window.DEALS = [
     value: 0.5, start: "2026-12-01", verified: true,
     source: "https://www.mealslash.com/deals/this-week"
   },
-  // ---- Signed-in app offers (Uber Eats pickup feed). Refreshed daily at 7:34 AM ET; end date rolls forward each run. ----
+  // ---- Signed-in app offers (Uber Eats pickup feed, item prices read from each store page). Refreshed daily at 7:34 AM ET. ----
   {
-    id: "ue-pita-med-bogo", chain: "PITA Mediterranean Street Food", cuisine: "mediterranean",
-    title: "Buy 1, get 1 free on Uber Eats pickup",
-    how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
-    value: 0.5, end: "2026-11-20", verified: false,
+    id: "ue-pita-med-bogo", item: "3 Mini Pitas $17 or Signature Platter $19.50 (also Greek Fries $11)", save: 17.0, chain: "PITA Mediterranean Street Food", cuisine: "mediterranean",
+    title: "Buy one, get one free on Signature Platter, 3 Mini Pitas or Greek Fries",
+    how: "Uber Eats app or site, switch to Pickup and add the item from the store page",
+    value: 0.5, end: "2026-11-20", verified: true,
     source: "https://www.ubereats.com/feed?diningMode=PICKUP"
   },
   {
-    id: "ue-med-grill-bogo", chain: "Mediterranean Grill", cuisine: "mediterranean",
-    title: "Buy 1, get 1 free on Uber Eats pickup",
-    how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
-    value: 0.5, end: "2026-11-20", verified: false,
+    id: "ue-med-grill-bogo", item: "Gyro Sandwich Combo $10.35 (also Hummus $6.32)", save: 10.35, chain: "Mediterranean Grill", cuisine: "mediterranean",
+    title: "Buy one, get one free on the Gyro Sandwich Combo or Hummus",
+    how: "Uber Eats app or site, switch to Pickup and add the item from the store page",
+    value: 0.5, end: "2026-11-20", verified: true,
     source: "https://www.ubereats.com/feed?diningMode=PICKUP"
   },
   {
-    id: "ue-lavash-free-item", chain: "Lavash", cuisine: "mediterranean",
-    title: "Buy 1, get a free item on Uber Eats pickup",
-    how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
-    value: 0.4, end: "2026-11-20", verified: false,
+    id: "ue-delbar-bogo", item: "Falafel $21.24, Koobideh $22.42, Joojeh or Lamb & Labneh $24.78 sandwich", save: 21.24, chain: "Delbar", cuisine: "mediterranean",
+    title: "Buy one, get one free on sandwiches",
+    how: "Uber Eats app or site, switch to Pickup and add the item from the store page",
+    value: 0.5, end: "2026-11-20", verified: true,
     source: "https://www.ubereats.com/feed?diningMode=PICKUP"
   },
   {
-    id: "ue-delbar-10off50", chain: "Delbar", cuisine: "mediterranean",
-    title: "$10 off $50+ on Uber Eats pickup",
-    how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
-    value: 0.2, end: "2026-11-20", verified: false,
+    id: "ue-lavash-free-hummus", item: "Buy Chicken Soltani Plate $22.50, get Hummus ($8) free", save: 8.0, chain: "Lavash", cuisine: "mediterranean",
+    title: "Free hummus with a Chicken Soltani Plate",
+    how: "Uber Eats app or site, switch to Pickup and add the item from the store page",
+    value: 0.3, end: "2026-11-20", verified: true,
     source: "https://www.ubereats.com/feed?diningMode=PICKUP"
   },
   {
-    id: "ue-popeyes-bogo", chain: "Popeyes", cuisine: "chicken",
-    title: "Buy 1, get 1 free on Uber Eats pickup",
-    how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
-    value: 0.5, end: "2026-11-20", verified: false,
+    id: "ue-popeyes-bogo", item: "Classic Chicken Sandwich $6.86 or Spicy $7.09 (also 12pc wings $17.36, wraps, Coke)", save: 6.86, chain: "Popeyes", cuisine: "chicken",
+    title: "Buy one, get one free on chicken sandwiches, wings and wraps",
+    how: "Uber Eats app or site, switch to Pickup and add the item from the store page",
+    value: 0.5, end: "2026-11-20", verified: true,
     source: "https://www.ubereats.com/feed?diningMode=PICKUP"
   },
   {
-    id: "ue-tropical-bogo", chain: "Tropical Smoothie", cuisine: "smoothie",
-    title: "Buy 1, get 1 free on Uber Eats pickup",
-    how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
-    value: 0.5, end: "2026-11-20", verified: false,
+    id: "ue-tropical-bogo", item: "Three Cheese Chicken 'Dilla $9.19 or Acai Bowl $13.69 (smoothies not included)", save: 9.19, chain: "Tropical Smoothie", cuisine: "smoothie",
+    title: "Buy one, get one free on acai bowls and the Three Cheese Chicken 'Dilla",
+    how: "Uber Eats app or site, switch to Pickup and add the item from the store page",
+    value: 0.5, end: "2026-11-20", verified: true,
     source: "https://www.ubereats.com/feed?diningMode=PICKUP"
   },
   {
-    id: "ue-firehouse-35off", chain: "Firehouse Subs", cuisine: "subs",
-    title: "35% off orders of $25+ on Uber Eats pickup",
-    how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
-    value: 0.35, end: "2026-11-20", verified: false,
+    id: "ue-firehouse-20off", item: "Club On A Sub $15.90 to $12.72, Steak & Cheese Melt $17.55 to $14.04", save: 3.18, chain: "Firehouse Subs", cuisine: "subs",
+    title: "20% off select large subs",
+    how: "Uber Eats app or site, switch to Pickup and add the item from the store page",
+    value: 0.2, end: "2026-11-20", verified: true,
     source: "https://www.ubereats.com/feed?diningMode=PICKUP"
   },
   {
-    id: "ue-rreal-bogo", chain: "Rreal Tacos", cuisine: "mexican",
-    title: "Buy 1, get 1 free on Uber Eats pickup",
-    how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
-    value: 0.5, end: "2026-11-20", verified: false,
+    id: "ue-rreal-bogo", item: "Single taco: Grilled Chicken or Al Pastor $5.94, Asada $7.49 (also Rreal Nachos $21.25)", save: 5.94, chain: "Rreal Tacos", cuisine: "mexican",
+    title: "Buy one, get one free on single tacos, nachos and the Trio",
+    how: "Uber Eats app or site, switch to Pickup and add the item from the store page",
+    value: 0.5, end: "2026-11-20", verified: true,
     source: "https://www.ubereats.com/feed?diningMode=PICKUP"
   },
   {
-    id: "ue-lavilla-bogo", chain: "Tacos La Villa", cuisine: "mexican",
-    title: "Buy 1, get 1 free on Uber Eats pickup",
-    how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
-    value: 0.5, end: "2026-11-20", verified: false,
+    id: "ue-lavilla-bogo", item: "Regular Burrito $10.99, Taco Plate $11.99, Birria tacos + consome $13.99", save: 10.99, chain: "Tacos La Villa", cuisine: "mexican",
+    title: "Buy one, get one free on plates, burritos and nachos",
+    how: "Uber Eats app or site, switch to Pickup and add the item from the store page",
+    value: 0.5, end: "2026-11-20", verified: true,
     source: "https://www.ubereats.com/feed?diningMode=PICKUP"
   },
   {
-    id: "ue-goldbergs-bogo", chain: "Goldberg's", cuisine: "breakfast",
-    title: "Buy 1, get 1 free on Uber Eats pickup",
-    how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
-    value: 0.5, end: "2026-11-20", verified: false,
+    id: "ue-goldbergs-bogo", item: "Egg & Cheese on a Bagel $10.80 or Egg, Meat & Cheese $13.35 (also soup $9.20, plain bagel $2.96)", save: 10.8, chain: "Goldberg's", cuisine: "breakfast",
+    title: "Buy one, get one free on bagel sandwiches and soup",
+    how: "Uber Eats app or site, switch to Pickup and add the item from the store page",
+    value: 0.5, end: "2026-11-20", verified: true,
     source: "https://www.ubereats.com/feed?diningMode=PICKUP"
   },
   {
-    id: "ue-jimmyjohns-bogo", item: "Chips only (bag of chips), not sandwiches", save: 2.0, chain: "Jimmy John's", cuisine: "subs",
-    title: "Buy 1, get 1 free on Uber Eats pickup",
-    how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
-    value: 0.5, end: "2026-11-20", verified: false,
+    id: "ue-panera-free-soup", item: "Buy a sandwich (Tuna $8.69, Frontega or Bravo $10.69), get a soup ($8.09) free", save: 8.09, chain: "Panera", cuisine: "sitdown",
+    title: "Free bowl of soup with a sandwich",
+    how: "Uber Eats app or site, switch to Pickup and add the item from the store page",
+    value: 0.4, end: "2026-11-20", verified: true,
     source: "https://www.ubereats.com/feed?diningMode=PICKUP"
   },
   {
-    id: "ue-panera-free-item", chain: "Panera", cuisine: "sitdown",
-    title: "Buy 1, get a free item on Uber Eats pickup",
-    how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
-    value: 0.4, end: "2026-11-20", verified: false,
+    id: "ue-papajohns-bogo", item: "Cheese or Create Your Own $12.79, Pepperoni $13.09, Grand Papa $23.09", save: 12.79, chain: "Papa Johns", cuisine: "pizza",
+    title: "Buy one, get one free on large pizzas",
+    how: "Uber Eats app or site, switch to Pickup and add the item from the store page",
+    value: 0.5, end: "2026-11-20", verified: true,
     source: "https://www.ubereats.com/feed?diningMode=PICKUP"
   },
   {
-    id: "ue-papajohns-bogo", chain: "Papa Johns", cuisine: "pizza",
-    title: "Buy 1, get 1 free on Uber Eats pickup",
-    how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
-    value: 0.5, end: "2026-11-20", verified: false,
-    source: "https://www.ubereats.com/feed?diningMode=PICKUP"
-  },
-  {
-    id: "ue-dunkin-4off16", chain: "Dunkin'", cuisine: "coffee",
-    title: "$4 off $16+ on Uber Eats pickup",
-    how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
-    value: 0.25, end: "2026-11-20", verified: false,
+    id: "ue-jimmyjohns-bogo", item: "Chips $2.29 or cookies $2.79 (not sandwiches)", save: 2.29, chain: "Jimmy John's", cuisine: "subs",
+    title: "Buy one, get one free on chips, cookies and brownies only",
+    how: "Uber Eats app or site, switch to Pickup and add the item from the store page",
+    value: 0.1, end: "2026-11-20", verified: true,
     source: "https://www.ubereats.com/feed?diningMode=PICKUP"
   }
 ];
