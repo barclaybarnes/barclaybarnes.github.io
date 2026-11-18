@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Pickup Deals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: one column of ranked deal rows, controls collapsed above, max 720px */
+:root{
+  --bg:#f5f6f1; --surface:#ffffff; --ink:#1c2116; --muted:#5f6656; --line:#dde0d4;
+  --olive:#5a6b1c; --olive-soft:#e8ecd6; --sumac:#a3293a; --sumac-soft:#f6e3e5; --warn:#8a5a00; --warn-soft:#fbefd2;
+  --display:"Bricolage Grotesque",system-ui,sans-serif; --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#14170f; --surface:#1d2117; --ink:#eceee4; --muted:#a3aa96; --line:#30362a;
+  --olive:#b5c86a; --olive-soft:#2b331b; --sumac:#ec8592; --sumac-soft:#3a1f24; --warn:#f0c46a; --warn-soft:#3a2f14;
+  color-scheme:dark;}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--body);
+  padding:max(14px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(40px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
+main{max-width:720px;margin:0 auto;display:grid;gap:22px}
+h1,h2{font-family:var(--display);margin:0;text-wrap:balance}
+h1{font-size:30px;font-weight:800;letter-spacing:-.01em}
+h2{font-size:18px;font-weight:600;display:flex;align-items:baseline;gap:8px}
+h2 small{font:500 13px var(--body);color:var(--muted)}
+.sub{color:var(--muted);margin:2px 0 0;font-size:14px}
+.rule{display:inline-block;background:var(--sumac-soft);color:var(--sumac);font-weight:600;font-size:12px;padding:2px 8px;border-radius:99px;letter-spacing:.02em}
+button,select,input{font:inherit;color:inherit}
+button{cursor:pointer;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:9px 14px;font-weight:600}
+button.primary{background:var(--olive);border-color:var(--olive);color:var(--bg)}
+button:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{outline:2px solid var(--olive);outline-offset:2px}
+select{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 10px;max-width:100%}
+.locbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.status{font-size:13px;color:var(--muted);min-height:1.2em}
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:0 14px}
+summary{cursor:pointer;padding:12px 0;font-weight:600;list-style:none;display:flex;justify-content:space-between}
+summary::after{content:"+";color:var(--muted)} details[open] summary::after{content:"–"}
+.panel{display:grid;gap:14px;padding-bottom:14px}
+.slider{display:grid;grid-template-columns:80px 1fr 42px;gap:10px;align-items:center}
+.slider output{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+input[type=range]{width:100%;accent-color:var(--olive)}
+.likes{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.likes label{display:flex;justify-content:space-between;align-items:center;gap:6px;font-size:14px}
+.likes select{padding:4px 6px;font-size:13px}
+.list{display:grid;gap:10px}
+.deal{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;grid-template-columns:52px 1fr;gap:12px;align-items:start}
+.score{font:800 22px/1 var(--display);font-variant-numeric:tabular-nums;color:var(--olive);text-align:center;padding-top:4px}
+.score span{display:block;font:500 10px var(--body);color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-top:3px}
+.deal .chain{font-weight:600;font-size:13px;color:var(--muted);letter-spacing:.02em}
+.deal .title{font-weight:600;margin:1px 0 4px;min-width:0}
+.meta{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:13px;color:var(--muted);align-items:center}
+.pill{font-size:12px;font-weight:600;padding:1px 8px;border-radius:99px;background:var(--olive-soft);color:var(--olive)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.code{font:600 12px ui-monospace,SFMono-Regular,Menlo,monospace;border:1px dashed var(--olive);color:var(--olive);background:transparent;padding:2px 8px;border-radius:6px}
+a{color:var(--olive)}
+.empty{color:var(--muted);font-size:14px;background:var(--surface);border:1px dashed var(--line);border-radius:12px;padding:14px}
+.med{display:grid;gap:6px}
+.med li{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding:6px 0}
+.med ul{list-style:none;margin:0;padding:0}
+.med .d{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+footer{font-size:13px;color:var(--muted);display:grid;gap:6px}
+@media (max-width:420px){.slider{grid-template-columns:70px 1fr 36px}.deal{grid-template-columns:44px 1fr;gap:10px}}
+@media (prefers-reduced-motion:no-preference){.deal{transition:transform .15s}}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Pickup Deals</h1>
+    <p class="sub">Ranked by what you save, what you like, and how close it is. <span class="rule">Pickup only, never delivery</span></p>
+  </header>
+
+  <section aria-label="Location" style="display:grid;gap:6px">
+    <div class="locbar">
+      <button id="geo" class="primary" type="button">Use my location</button>
+      <select id="place" aria-label="Saved places"></select>
+      <button id="save" type="button">Save this spot</button>
+    </div>
+    <div class="status" id="status">Pick a location to see distances.</div>
+  </section>
+
+  <details id="tune">
+    <summary>Ranking weights and likes</summary>
+    <div class="panel">
+      <div class="slider"><label for="wv">Value</label><input id="wv" type="range" min="0" max="100"><output id="wvo"></output></div>
+      <div class="slider"><label for="wl">Likes</label><input id="wl" type="range" min="0" max="100"><output id="wlo"></output></div>
+      <div class="slider"><label for="wd">Distance</label><input id="wd" type="range" min="0" max="100"><output id="wdo"></output></div>
+      <label style="display:flex;gap:8px;align-items:center">Farthest I'll drive
+        <select id="maxmi"><option>3</option><option>5</option><option>8</option><option>12</option></select> miles</label>
+      <div class="likes" id="likes"></div>
+      <button id="reset" type="button" style="justify-self:start">Reset to defaults</button>
+    </div>
+  </details>
+
+  <section style="display:grid;gap:10px">
+    <h2>Available now <small id="nowCount"></small></h2>
+    <div class="list" id="now"></div>
+  </section>
+
+  <section style="display:grid;gap:10px">
+    <h2>Coming up</h2>
+    <div class="list" id="later"></div>
+  </section>
+
+  <section class="med" style="display:grid;gap:10px">
+    <h2>Mediterranean near you</h2>
+    <div id="med"></div>
+  </section>
+
+  <footer>
+    <div id="checked"></div>
+    <div>Not covered yet: offers that only show when signed in (Starbucks, Dutch Bros, Crumbl, Tropical Smoothie, Uber Eats, DoorDash, Grubhub, Too Good To Go). Restaurant locations come from OpenStreetMap, so a few stores may be missing.</div>
+  </footer>
+</main>
+
+<script src="deals.js"></script>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const CUISINES={mediterranean:"Mediterranean",chicken:"Chicken",burgers:"Burgers",subs:"Subs",mexican:"Mexican",coffee:"Coffee",dessert:"Dessert",pizza:"Pizza",asian:"Asian",breakfast:"Breakfast",smoothie:"Smoothies",sitdown:"Sit-down"};
+const LEVELS=[["1","Love"],["0.7","Like"],["0.4","Meh"],["0","Skip"]];
+const DEF={w:{v:40,l:35,d:25},maxmi:"8",likes:{mediterranean:"1",chicken:"0.7",burgers:"0.7",subs:"0.7",mexican:"0.7",coffee:"0.7",dessert:"0.4",pizza:"0.4",asian:"0.4",breakfast:"0.4",smoothie:"0.4",sitdown:"0.4"},
+  places:[{name:"KSU Marietta Campus",lat:33.9384,lng:-84.5208}]};
+const store={get(k,d){try{const v=localStorage.getItem("pd."+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem("pd."+k,JSON.stringify(v))}catch(e){}}};
+let st={w:store.get("w",DEF.w),maxmi:store.get("maxmi",DEF.maxmi),likes:Object.assign({},DEF.likes,store.get("likes",{})),places:store.get("places",DEF.places),loc:store.get("loc",null)};
+let stores=[]; // {name,lat,lng,chain,med,cuisine}
+
+// ---------- controls ----------
+function renderControls(){
+  [["wv","v"],["wl","l"],["wd","d"]].forEach(([id,k])=>{$(id).value=st.w[k];});
+  $("maxmi").value=st.maxmi;
+  $("likes").innerHTML=Object.entries(CUISINES).map(([k,n])=>`<label for="lk-${k}">${n}<select id="lk-${k}" data-k="${k}">${LEVELS.map(([v,t])=>`<option value="${v}"${st.likes[k]===v?" selected":""}>${t}</option>`).join("")}</select></label>`).join("");
+  renderPlaces(); showWeights();
+}
+function normW(){const s=st.w.v+st.w.l+st.w.d||1;return{v:st.w.v/s,l:st.w.l/s,d:st.w.d/s}}
+function showWeights(){const n=normW();$("wvo").value=Math.round(n.v*100)+"%";$("wlo").value=Math.round(n.l*100)+"%";$("wdo").value=Math.round(n.d*100)+"%"}
+function renderPlaces(){
+  const sel=$("place");
+  sel.innerHTML=`<option value="">Saved places…</option>`+st.places.map((p,i)=>`<option value="${i}">${esc(p.name)}</option>`).join("");
+  if(st.loc&&st.loc.name){const i=st.places.findIndex(p=>p.name===st.loc.name);if(i>=0)sel.value=String(i)}
+}
+["wv","wl","wd"].forEach(id=>$(id).addEventListener("input",e=>{st.w[{wv:"v",wl:"l",wd:"d"}[id]]=+e.target.value;store.set("w",st.w);showWeights();render()}));
+$("maxmi").addEventListener("change",e=>{st.maxmi=e.target.value;store.set("maxmi",st.maxmi);loadStores()});
+$("likes").addEventListener("change",e=>{const k=e.target.dataset.k;if(!k)return;st.likes[k]=e.target.value;store.set("likes",st.likes);render()});
+$("reset").addEventListener("click",()=>{st.w={...DEF.w};st.maxmi=DEF.maxmi;st.likes={...DEF.likes};store.set("w",st.w);store.set("maxmi",st.maxmi);store.set("likes",st.likes);renderControls();loadStores()});
+$("place").addEventListener("change",e=>{const p=st.places[+e.target.value];if(!p)return;setLoc({lat:p.lat,lng:p.lng,name:p.name})});
+$("geo").addEventListener("click",()=>{
+  if(!navigator.geolocation){status("This browser can't share its location. Pick a saved place instead.");return}
+  status("Finding you…");
+  navigator.geolocation.getCurrentPosition(
+    pos=>setLoc({lat:pos.coords.latitude,lng:pos.coords.longitude,name:null}),
+    err=>status(err.code===1?"Location is blocked. Allow it for this site in your browser settings, or pick a saved place.":"Couldn't get your location. Try again or pick a saved place."),
+    {enableHighAccuracy:true,timeout:15000,maximumAge:120000});
+});
+$("save").addEventListener("click",()=>{
+  if(!st.loc){status("Use your location first, then save it.");return}
+  const box=$("status");
+  box.innerHTML=`<span style="display:inline-flex;gap:6px;flex-wrap:wrap;align-items:center"><label for="pname">Name this spot</label><input id="pname" style="border:1px solid var(--line);border-radius:8px;padding:6px 8px;background:var(--surface)" placeholder="Home, Work…"><button id="pok" type="button">Save</button></span>`;
+  $("pname").focus();
+  const done=()=>{const n=$("pname").value.trim();if(!n)return;st.places=st.places.filter(p=>p.name!==n).concat([{name:n,lat:st.loc.lat,lng:st.loc.lng}]);store.set("places",st.places);st.loc.name=n;store.set("loc",st.loc);renderPlaces();status(`Saved “${n}”.`)};
+  $("pok").addEventListener("click",done);$("pname").addEventListener("keydown",e=>{if(e.key==="Enter")done()});
+});
+function status(t){$("status").textContent=t}
+function setLoc(l){st.loc=l;store.set("loc",l);renderPlaces();loadStores()}
+
+// ---------- stores from OpenStreetMap ----------
+async function loadStores(){
+  if(!st.loc){render();return}
+  const r=Math.round(+st.maxmi*1609.34*1.25);
+  const key=`stores:${st.loc.lat.toFixed(2)},${st.loc.lng.toFixed(2)},${r}`;
+  const cached=store.get(key,null);
+  if(cached&&Date.now()-cached.t<7*864e5){stores=cached.s;done();return}
+  status("Finding restaurants near you…");render();
+  const q=`[out:json][timeout:40];nwr["amenity"~"fast_food|restaurant|cafe|ice_cream"](around:${r},${st.loc.lat},${st.loc.lng});out center tags;`;
+  const eps=["https://overpass-api.de/api/interpreter","https://overpass.kumi.systems/api/interpreter"];
+  for(const ep of eps){
+    try{
+      const res=await fetch(ep,{method:"POST",body:"data="+encodeURIComponent(q),headers:{"Content-Type":"application/x-www-form-urlencoded"}});
+      if(!res.ok)throw new Error(res.status);
+      const j=await res.json();
+      stores=parse(j.elements||[]);
+      try{store.set(key,{t:Date.now(),s:stores})}catch(e){}
+      done();return;
+    }catch(e){}
+  }
+  stores=[];status("Couldn't load nearby restaurants right now, so distance isn't counted. Try again in a minute.");render();
+  function done(){const n=stores.filter(s=>s.chain||s.med).length;status(`${st.loc.name?st.loc.name:"Your location"} · ${n} matching restaurants within about ${st.maxmi} miles`);render()}
+}
+function parse(els){
+  const out=[];
+  for(const e of els){
+    const t=e.tags||{};const nm=(t.brand||"")+" "+(t.name||"");const lat=e.lat??e.center?.lat,lng=e.lon??e.center?.lon;
+    if(lat==null)continue;
+    let chain=null;for(const[c,info]of Object.entries(CHAINS)){if(info.re.test((t.brand||"").trim())||info.re.test((t.name||"").trim())){chain=c;break}}
+    const med=MED_RE.cuisine.test(t.cuisine||"")||MED_RE.name.test(t.name||"");
+    if(!chain&&!med)continue;
+    out.push({name:t.name||t.brand||chain,lat,lng,chain,med,addr:[t["addr:housenumber"],t["addr:street"]].filter(Boolean).join(" ")});
+  }
+  return out;
+}
+function miles(a,b){const R=3958.8,r=x=>x*Math.PI/180;const dl=r(b.lat-a.lat),dg=r(b.lng-a.lng);const h=Math.sin(dl/2)**2+Math.cos(r(a.lat))*Math.cos(r(b.lat))*Math.sin(dg/2)**2;return 2*R*Math.asin(Math.sqrt(h))}
+function nearest(chain){let best=null;for(const s of stores){if(s.chain!==chain)continue;const d=miles(st.loc,s);if(!best||d<best.d)best={...s,d}}return best}
+
+// ---------- timing ----------
+const DAYN=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+function endOfDay(s){const[y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d,23,59,59)}
+function startOfDay(s){const[y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d)}
+function hourLabel(h){return h===12?"noon":h>12?(h-12)+" PM":h+" AM"}
+function timing(deal,now){
+  if(deal.end&&now>endOfDay(deal.end))return{state:"gone"};
+  if(deal.start&&now<startOfDay(deal.start))return{state:"later",when:"Starts "+fmtDate(deal.start)};
+  if(!deal.windows)return{state:"now"};
+  const dow=now.getDay(),h=now.getHours()+now.getMinutes()/60;
+  for(const w of deal.windows){if(w.days.includes(dow)&&h>=(w.from??0)&&h<(w.to??24))return{state:"now"}}
+  for(let i=0;i<8;i++){const d=(dow+i)%7;
+    for(const w of deal.windows){if(!w.days.includes(d))continue;const from=w.from??0;if(i===0&&h>=from)continue;
+      const day=new Date(now);day.setDate(now.getDate()+i);if(deal.end&&day>endOfDay(deal.end))continue;
+      return{state:"later",when:(i===0?"Today":i===1?"Tomorrow":DAYN[d])+(from?" from "+hourLabel(from):"")}}}
+  return{state:"gone"};
+}
+function fmtDate(s){return startOfDay(s).toLocaleDateString(undefined,{month:"short",day:"numeric"})}
+
+// ---------- scoring ----------
+function scoreDeal(deal){
+  const n=normW(),cuisine=deal.cuisine||CHAINS[deal.chain]?.cuisine;
+  const like=+(st.likes[cuisine]??0.4);
+  const val=Math.min(1,deal.value/0.5);
+  let near=null,dist=0.25;
+  if(st.loc&&stores.length){near=nearest(deal.chain);dist=near?Math.max(0,1-near.d/+st.maxmi):0}
+  return{s:Math.round(100*(n.v*val+n.l*like+n.d*dist)),like,near};
+}
+
+// ---------- render ----------
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function card(deal,sc,tm){
+  const near=sc.near;
+  const dist=!st.loc?"Set a location for distance":!stores.length?"":near?`${near.d.toFixed(1)} mi · <a href="https://www.google.com/maps/dir/?api=1&destination=${near.lat},${near.lng}" target="_blank" rel="noopener">Directions</a>`:`None within ${st.maxmi} mi`;
+  return `<article class="deal"><div class="score">${sc.s}<span>score</span></div><div style="min-width:0">
+    <div class="chain">${esc(deal.chain)}</div><div class="title">${esc(deal.title)}</div>
+    <div class="meta">${deal.code?`<button class="code" data-code="${esc(deal.code)}" title="Copy code">${esc(deal.code)}</button>`:""}
+      ${tm.when?`<span class="pill">${esc(tm.when)}</span>`:""}
+      ${deal.end?`<span>Ends ${fmtDate(deal.end)}</span>`:""}
+      ${deal.verified?"":`<span class="pill warn">Check terms in app</span>`}
+      ${dist?`<span>${dist}</span>`:""}</div>
+    <div class="meta" style="margin-top:4px"><span>${esc(deal.how)}</span> · <a href="${esc(deal.source)}" target="_blank" rel="noopener">Source</a></div>
+  </div></article>`;
+}
+function render(){
+  const now=new Date();const nowL=[],laterL=[];
+  for(const d of DEALS){const tm=timing(d,now);if(tm.state==="gone")continue;const sc=scoreDeal(d);if(sc.like===0)continue;
+    if(st.loc&&stores.length&&!sc.near)sc.s=Math.min(sc.s,Math.round(sc.s*0.5));
+    (tm.state==="now"?nowL:laterL).push({d,sc,tm})}
+  nowL.sort((a,b)=>b.sc.s-a.sc.s);laterL.sort((a,b)=>b.sc.s-a.sc.s);
+  $("now").innerHTML=nowL.length?nowL.map(x=>card(x.d,x.sc,x.tm)).join(""):`<div class="empty">No deals running right now. Check “Coming up” below.</div>`;
+  $("later").innerHTML=laterL.length?laterL.map(x=>card(x.d,x.sc,x.tm)).join(""):`<div class="empty">Nothing scheduled yet.</div>`;
+  $("nowCount").textContent=nowL.length?nowL.length+" deals":"";
+  if(!st.loc){$("med").innerHTML=`<div class="empty">Use your location or pick a saved place to see Mediterranean spots nearby.</div>`}
+  else{const seen=new Set();const meds=stores.filter(s=>s.med).map(s=>({...s,d:miles(st.loc,s)})).sort((a,b)=>a.d-b.d).filter(s=>{const k=s.name+s.d.toFixed(1);if(seen.has(k))return false;seen.add(k);return true}).slice(0,10);
+    $("med").innerHTML=meds.length?`<ul>${meds.map(s=>`<li><span>${esc(s.name)}${s.addr?` <span class="d">· ${esc(s.addr)}</span>`:""}</span><a class="d" href="https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lng}" target="_blank" rel="noopener">${s.d.toFixed(1)} mi</a></li>`).join("")}</ul>`:`<div class="empty">${stores.length?"None found within "+st.maxmi+" miles.":"Loading…"}</div>`}
+  $("checked").textContent=`Deals last checked ${fmtDate(DEALS_CHECKED)}. Delivery-only offers are left out on purpose.`;
+}
+document.addEventListener("click",e=>{const b=e.target.closest(".code");if(!b)return;const c=b.dataset.code;
+  (navigator.clipboard?navigator.clipboard.writeText(c):Promise.reject()).then(()=>{b.textContent="Copied";setTimeout(()=>b.textContent=c,1200)}).catch(()=>{})});
+
+renderControls();
+if(st.loc)loadStores();else render();
+setInterval(render,5*60*1000);
+})();
+</script>
+</body>
+</html>
