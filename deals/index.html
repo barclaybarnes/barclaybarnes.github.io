@@ -7,6 +7,8 @@
 <title>Pickup Deals</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 <style>
 /* Layout: one column of ranked deal rows, controls collapsed above, max 720px */
 :root{
@@ -66,6 +68,19 @@ a{color:var(--olive)}
 footer{font-size:13px;color:var(--muted);display:grid;gap:6px}
 @media (max-width:420px){.slider{grid-template-columns:70px 1fr 36px}.deal{grid-template-columns:44px 1fr;gap:10px}}
 @media (prefers-reduced-motion:no-preference){.deal{transition:transform .15s}}
+#mapwrap{display:grid;gap:8px}
+#map{height:340px;border-radius:12px;border:1px solid var(--line);background:var(--surface);z-index:0}
+@media (max-width:420px){#map{height:300px}}
+.pin{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--olive);color:var(--bg);font:700 12px/1 var(--body);border:2px solid var(--bg);box-shadow:0 1px 4px rgba(0,0,0,.35)}
+.pin.med{background:var(--sumac);width:22px;height:22px;font-size:11px}
+.pin.me{background:#2563eb;width:16px;height:16px}
+.leaflet-popup-content{font:14px/1.45 var(--body);margin:10px 12px}
+.leaflet-popup-content b{display:block}
+.leaflet-popup-content .go{display:flex;gap:10px;margin-top:6px;flex-wrap:wrap}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--surface);color:var(--ink)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);align-items:center}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+button.link{border:0;background:none;padding:0;color:var(--olive);text-decoration:underline;font-weight:500;font-size:13px}
 </style>
 </head>
 <body>
@@ -82,6 +97,11 @@ footer{font-size:13px;color:var(--muted);display:grid;gap:6px}
       <button id="save" type="button">Save this spot</button>
     </div>
     <div class="status" id="status">Pick a location to see distances.</div>
+  </section>
+
+  <section id="mapwrap" aria-label="Map">
+    <div id="map"></div>
+    <div class="legend"><span><i style="background:#2563eb"></i>You</span><span><i style="background:var(--olive)"></i>Deal (number is its score)</span><span><i style="background:var(--sumac)"></i>Mediterranean</span></div>
   </section>
 
   <details id="tune">
@@ -239,7 +259,7 @@ function scoreDeal(deal){
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 function card(deal,sc,tm){
   const near=sc.near;
-  const dist=!st.loc?"Set a location for distance":!stores.length?"":near?`${near.d.toFixed(1)} mi · <a href="https://www.google.com/maps/dir/?api=1&destination=${near.lat},${near.lng}" target="_blank" rel="noopener">Directions</a>`:`None within ${st.maxmi} mi`;
+  const dist=!st.loc?"Set a location for distance":!stores.length?"":near?`${near.d.toFixed(1)} mi · <button class="link" type="button" data-pin="${esc(deal.chain)}">Map</button> · ${dirLinks(near)}`:`None within ${st.maxmi} mi`;
   return `<article class="deal"><div class="score">${sc.s}<span>score</span></div><div style="min-width:0">
     <div class="chain">${esc(deal.chain)}</div><div class="title">${esc(deal.title)}</div>
     <div class="meta">${deal.code?`<button class="code" data-code="${esc(deal.code)}" title="Copy code">${esc(deal.code)}</button>`:""}
@@ -261,9 +281,53 @@ function render(){
   $("nowCount").textContent=nowL.length?nowL.length+" deals":"";
   if(!st.loc){$("med").innerHTML=`<div class="empty">Use your location or pick a saved place to see Mediterranean spots nearby.</div>`}
   else{const seen=new Set();const meds=stores.filter(s=>s.med).map(s=>({...s,d:miles(st.loc,s)})).sort((a,b)=>a.d-b.d).filter(s=>{const k=s.name+s.d.toFixed(1);if(seen.has(k))return false;seen.add(k);return true}).slice(0,10);
-    $("med").innerHTML=meds.length?`<ul>${meds.map(s=>`<li><span>${esc(s.name)}${s.addr?` <span class="d">· ${esc(s.addr)}</span>`:""}</span><a class="d" href="https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lng}" target="_blank" rel="noopener">${s.d.toFixed(1)} mi</a></li>`).join("")}</ul>`:`<div class="empty">${stores.length?"None found within "+st.maxmi+" miles.":"Loading…"}</div>`}
+    $("med").innerHTML=meds.length?`<ul>${meds.map(s=>`<li><span>${esc(s.name)}${s.addr?` <span class="d">· ${esc(s.addr)}</span>`:""}</span><span class="d">${s.d.toFixed(1)} mi · <button class="link" type="button" data-pin="med:${s.lat},${s.lng}">Map</button></span></li>`).join("")}</ul>`:`<div class="empty">${stores.length?"None found within "+st.maxmi+" miles.":"Loading…"}</div>`}
+  updateMap(nowL,laterL);
   $("checked").textContent=`Deals last checked ${fmtDate(DEALS_CHECKED)}. Delivery-only offers are left out on purpose.`;
 }
+// ---------- map ----------
+function dirLinks(p){const ll=`${p.lat},${p.lng}`;const apple=/iPhone|iPad|Macintosh/.test(navigator.userAgent);
+  const g=`<a href="https://www.google.com/maps/dir/?api=1&destination=${ll}" target="_blank" rel="noopener">Google Maps</a>`;
+  const a=`<a href="https://maps.apple.com/?daddr=${ll}&dirflg=d" target="_blank" rel="noopener">Apple Maps</a>`;
+  return apple?a+" · "+g:g+" · "+a}
+let map=null,layer=null,pins={};
+function initMap(){
+  if(map||!window.L)return!!map;
+  map=L.map("map",{zoomControl:true,attributionControl:true}).setView([33.85,-84.43],11);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+  layer=L.layerGroup().addTo(map);return true;
+}
+function updateMap(nowL,laterL){
+  if(!initMap())return;
+  layer.clearLayers();pins={};
+  if(!st.loc){return}
+  const pts=[[st.loc.lat,st.loc.lng]];
+  L.marker([st.loc.lat,st.loc.lng],{icon:L.divIcon({className:"",html:'<div class="pin me"></div>',iconSize:[16,16]}),title:"You",zIndexOffset:1000}).addTo(layer).bindPopup("<b>You are here</b>");
+  // one pin per store, listing every deal there
+  const byStore={};
+  for(const x of nowL.concat(laterL)){const n=x.sc.near;if(!n)continue;const k=n.lat+","+n.lng;
+    (byStore[k]=byStore[k]||{n,chain:x.d.chain,items:[],best:0,now:false}).items.push(x);
+    if(x.tm.state==="now"){byStore[k].now=true;byStore[k].best=Math.max(byStore[k].best,x.sc.s)}}
+  for(const g of Object.values(byStore)){
+    const best=g.now?g.best:Math.max(...g.items.map(x=>x.sc.s));
+    const html=`<b>${esc(g.n.name)}</b>${g.n.addr?`<span style="color:var(--muted)">${esc(g.n.addr)}</span>`:""}<span style="color:var(--muted)"> · ${g.n.d.toFixed(1)} mi</span>`+
+      g.items.map(x=>`<div style="margin-top:6px">${esc(x.d.title)}${x.d.code?` <span class="code">${esc(x.d.code)}</span>`:""}${x.tm.when?` <span class="pill">${esc(x.tm.when)}</span>`:""}</div>`).join("")+
+      `<div class="go">${dirLinks(g.n)}</div>`;
+    const m=L.marker([g.n.lat,g.n.lng],{icon:L.divIcon({className:"",html:`<div class="pin" style="${g.now?"":"opacity:.55"}">${best}</div>`,iconSize:[30,30]}),title:g.chain,zIndexOffset:best}).addTo(layer).bindPopup(html,{autoPanPaddingTopLeft:[50,12]});
+    pins[g.chain]=pins[g.chain]||m;pts.push([g.n.lat,g.n.lng]);
+  }
+  const seen=new Set();
+  stores.filter(s=>s.med).map(s=>({...s,d:miles(st.loc,s)})).sort((a,b)=>a.d-b.d).slice(0,15).forEach(s=>{
+    const k=s.lat+","+s.lng;if(seen.has(k))return;seen.add(k);
+    const m=L.marker([s.lat,s.lng],{icon:L.divIcon({className:"",html:'<div class="pin med">M</div>',iconSize:[22,22]}),title:s.name}).addTo(layer)
+      .bindPopup(`<b>${esc(s.name)}</b>${s.addr?`<span style="color:var(--muted)">${esc(s.addr)}</span>`:""}<span style="color:var(--muted)"> · ${s.d.toFixed(1)} mi</span><div class="go">${dirLinks(s)}</div>`);
+    pins["med:"+k]=m;pts.push([s.lat,s.lng]);
+  });
+  if(pts.length>1)map.fitBounds(pts,{padding:[30,30],maxZoom:14});else map.setView(pts[0],13);
+}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-pin]");if(!b)return;const m=pins[b.dataset.pin];if(!m)return;
+  $("mapwrap").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});
+  map.setView(m.getLatLng(),15);m.openPopup()});
 document.addEventListener("click",e=>{const b=e.target.closest(".code");if(!b)return;const c=b.dataset.code;
   (navigator.clipboard?navigator.clipboard.writeText(c):Promise.reject()).then(()=>{b.textContent="Copied";setTimeout(()=>b.textContent=c,1200)}).catch(()=>{})});
 
