@@ -189,32 +189,49 @@ function status(t){$("status").textContent=t}
 function setLoc(l){st.loc=l;store.set("loc",l);renderPlaces();loadStores()}
 
 // ---------- stores from OpenStreetMap ----------
+let loadSeq=0;
 async function loadStores(){
   if(!st.loc){render();return}
+  const seq=++loadSeq;
   const r=Math.round(+st.maxmi*1609.34*1.25);
-  const key=`stores:${st.loc.lat.toFixed(2)},${st.loc.lng.toFixed(2)},${r}`;
+  const key=`stores3:${st.loc.lat.toFixed(2)},${st.loc.lng.toFixed(2)},${r}`;
   const cached=store.get(key,null);
-  if(cached&&Date.now()-cached.t<7*864e5){stores=cached.s;done();return}
+  if(cached&&cached.s&&cached.s.length&&Date.now()-cached.t<3*864e5){stores=cached.s;done();return}
   status("Finding restaurants near you…");render();
-  const q=`[out:json][timeout:40];nwr["amenity"~"fast_food|restaurant|cafe|ice_cream"](around:${r},${st.loc.lat},${st.loc.lng});out center tags;`;
-  const eps=["https://overpass-api.de/api/interpreter","https://overpass.kumi.systems/api/interpreter"];
+  // Ask only for places whose name/brand matches a chain we track, or Mediterranean cuisine: much faster than every restaurant.
+  const names=Object.values(CHAINS).map(c=>c.re.source).concat([MED_RE.name.source])
+    .join("|").replace(/\\b|\^|\$/g,"").replace(/'\?/g,".?").replace(/"/g,"");
+  const around=`(around:${r},${st.loc.lat.toFixed(5)},${st.loc.lng.toFixed(5)})`;
+  const am='["amenity"~"fast_food|restaurant|cafe|ice_cream"]';
+  const q=`[out:json][timeout:25];(nwr${am}["name"~"${names}",i]${around};nwr${am}["brand"~"${names}",i]${around};nwr${am}["cuisine"~"mediterranean|greek|lebanese|middle_eastern|turkish|falafel|kebab|persian|shawarma",i]${around};);out center tags 3000;`;
+  const eps=["https://overpass-api.de/api/interpreter","https://overpass.private.coffee/api/interpreter","https://maps.mail.ru/osm/tools/overpass/api/interpreter"];
+  let lastErr="";
   for(const ep of eps){
     try{
-      const res=await fetch(ep,{method:"POST",body:"data="+encodeURIComponent(q),headers:{"Content-Type":"application/x-www-form-urlencoded"}});
-      if(!res.ok)throw new Error(res.status);
+      const ctl=new AbortController();const tm=setTimeout(()=>ctl.abort(),30000);
+      const res=await fetch(ep,{method:"POST",body:"data="+encodeURIComponent(q),headers:{"Content-Type":"application/x-www-form-urlencoded"},signal:ctl.signal});
+      clearTimeout(tm);
+      if(!res.ok)throw new Error("HTTP "+res.status);
       const j=await res.json();
-      stores=parse(j.elements||[]);
+      if(j.remark&&/error|timed out|runtime/i.test(j.remark))throw new Error(j.remark);
+      const found=parse(j.elements||[]);
+      if(seq!==loadSeq)return;
+      if(!found.length)throw new Error("no matches");
+      stores=found;
       try{store.set(key,{t:Date.now(),s:stores})}catch(e){}
       done();return;
-    }catch(e){}
+    }catch(e){lastErr=String(e&&e.message||e);console.warn("store lookup failed",ep,lastErr)}
   }
-  stores=[];status("Couldn't load nearby restaurants right now, so distance isn't counted. Try again in a minute.");render();
+  if(seq!==loadSeq)return;
+  stores=[];render();
+  $("status").innerHTML=`Couldn't load nearby restaurants (${esc(lastErr.slice(0,60))}), so pins and distance are missing. <button class="link" type="button" id="retry">Try again</button>`;
+  $("retry").addEventListener("click",loadStores);
   function done(){const n=stores.filter(s=>s.chain||s.med).length;status(`${st.loc.name?st.loc.name:"Your location"} · ${n} matching restaurants within about ${st.maxmi} miles`);render()}
 }
 function parse(els){
   const out=[];
   for(const e of els){
-    const t=e.tags||{};const nm=(t.brand||"")+" "+(t.name||"");const lat=e.lat??e.center?.lat,lng=e.lon??e.center?.lon;
+    const t0=e.tags||{};const t={};for(const k in t0)t[k]=String(t0[k]).replace(/[\u2018\u2019]/g,"'");const nm=(t.brand||"")+" "+(t.name||"");const lat=e.lat??e.center?.lat,lng=e.lon??e.center?.lon;
     if(lat==null)continue;
     let chain=null;for(const[c,info]of Object.entries(CHAINS)){if(info.re.test((t.brand||"").trim())||info.re.test((t.name||"").trim())){chain=c;break}}
     const med=MED_RE.cuisine.test(t.cuisine||"")||MED_RE.name.test(t.name||"");
@@ -300,7 +317,8 @@ function initMap(){
 function updateMap(nowL,laterL){
   if(!initMap())return;
   layer.clearLayers();pins={};
-  if(!st.loc){return}
+  if(!st.loc){L.popup({closeButton:false}).setLatLng(map.getCenter()).setContent("Tap <b>Use my location</b> or pick a saved place to see deal pins.").openOn(map);return}
+  map.closePopup();
   const pts=[[st.loc.lat,st.loc.lng]];
   L.marker([st.loc.lat,st.loc.lng],{icon:L.divIcon({className:"",html:'<div class="pin me"></div>',iconSize:[16,16]}),title:"You",zIndexOffset:1000}).addTo(layer).bindPopup("<b>You are here</b>");
   // one pin per store, listing every deal there
@@ -333,6 +351,7 @@ document.addEventListener("click",e=>{const b=e.target.closest(".code");if(!b)re
 
 renderControls();
 if(st.loc)loadStores();else render();
+try{navigator.permissions&&navigator.permissions.query({name:"geolocation"}).then(p=>{if(p.state==="granted"&&(!st.loc||!st.loc.name))$("geo").click()}).catch(()=>{})}catch(e){}
 setInterval(render,5*60*1000);
 })();
 </script>
