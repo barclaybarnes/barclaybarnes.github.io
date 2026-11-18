@@ -101,6 +101,105 @@ window.DEALS = [
     how: "Hardee's app",
     value: 0.5, start: "2026-12-01", verified: true,
     source: "https://www.mealslash.com/deals/this-week"
+  },
+  // ---- Signed-in app offers (Uber Eats pickup feed). Refreshed daily at 7:34 AM ET; end date rolls forward each run. ----
+  {
+    id: "ue-pita-med-bogo", chain: "PITA Mediterranean Street Food", cuisine: "mediterranean",
+    title: "Buy 1, get 1 free on Uber Eats pickup",
+    how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
+    value: 0.5, end: "2026-11-20", verified: false,
+    source: "https://www.ubereats.com/feed?diningMode=PICKUP"
+  },
+  {
+    id: "ue-med-grill-bogo", chain: "Mediterranean Grill", cuisine: "mediterranean",
+    title: "Buy 1, get 1 free on Uber Eats pickup",
+    how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
+    value: 0.5, end: "2026-11-20", verified: false,
+    source: "https://www.ubereats.com/feed?diningMode=PICKUP"
+  },
+  {
+    id: "ue-lavash-free-item", chain: "Lavash", cuisine: "mediterranean",
+    title: "Buy 1, get a free item on Uber Eats pickup",
+    how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
+    value: 0.4, end: "2026-11-20", verified: false,
+    source: "https://www.ubereats.com/feed?diningMode=PICKUP"
+  },
+  {
+    id: "ue-delbar-10off50", chain: "Delbar", cuisine: "mediterranean",
+    title: "$10 off $50+ on Uber Eats pickup",
+    how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
+    value: 0.2, end: "2026-11-20", verified: false,
+    source: "https://www.ubereats.com/feed?diningMode=PICKUP"
+  },
+  {
+    id: "ue-popeyes-bogo", chain: "Popeyes", cuisine: "chicken",
+    title: "Buy 1, get 1 free on Uber Eats pickup",
+    how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
+    value: 0.5, end: "2026-11-20", verified: false,
+    source: "https://www.ubereats.com/feed?diningMode=PICKUP"
+  },
+  {
+    id: "ue-tropical-bogo", chain: "Tropical Smoothie", cuisine: "smoothie",
+    title: "Buy 1, get 1 free on Uber Eats pickup",
+    how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
+    value: 0.5, end: "2026-11-20", verified: false,
+    source: "https://www.ubereats.com/feed?diningMode=PICKUP"
+  },
+  {
+    id: "ue-firehouse-35off", chain: "Firehouse Subs", cuisine: "subs",
+    title: "35% off orders of $25+ on Uber Eats pickup",
+    how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
+    value: 0.35, end: "2026-11-20", verified: false,
+    source: "https://www.ubereats.com/feed?diningMode=PICKUP"
+  },
+  {
+    id: "ue-rreal-bogo", chain: "Rreal Tacos", cuisine: "mexican",
+    title: "Buy 1, get 1 free on Uber Eats pickup",
+    how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
+    value: 0.5, end: "2026-11-20", verified: false,
+    source: "https://www.ubereats.com/feed?diningMode=PICKUP"
+  },
+  {
+    id: "ue-lavilla-bogo", chain: "Tacos La Villa", cuisine: "mexican",
+    title: "Buy 1, get 1 free on Uber Eats pickup",
+    how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
+    value: 0.5, end: "2026-11-20", verified: false,
+    source: "https://www.ubereats.com/feed?diningMode=PICKUP"
+  },
+  {
+    id: "ue-goldbergs-bogo", chain: "Goldberg's", cuisine: "breakfast",
+    title: "Buy 1, get 1 free on Uber Eats pickup",
+    how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
+    value: 0.5, end: "2026-11-20", verified: false,
+    source: "https://www.ubereats.com/feed?diningMode=PICKUP"
+  },
+  {
+    id: "ue-jimmyjohns-bogo", chain: "Jimmy John's", cuisine: "subs",
+    title: "Buy 1, get 1 free on Uber Eats pickup",
+    how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
+    value: 0.5, end: "2026-11-20", verified: false,
+    source: "https://www.ubereats.com/feed?diningMode=PICKUP"
+  },
+  {
+    id: "ue-panera-free-item", chain: "Panera", cuisine: "sitdown",
+    title: "Buy 1, get a free item on Uber Eats pickup",
+    how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
+    value: 0.4, end: "2026-11-20", verified: false,
+    source: "https://www.ubereats.com/feed?diningMode=PICKUP"
+  },
+  {
+    id: "ue-papajohns-bogo", chain: "Papa Johns", cuisine: "pizza",
+    title: "Buy 1, get 1 free on Uber Eats pickup",
+    how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
+    value: 0.5, end: "2026-11-20", verified: false,
+    source: "https://www.ubereats.com/feed?diningMode=PICKUP"
+  },
+  {
+    id: "ue-dunkin-4off16", chain: "Dunkin'", cuisine: "coffee",
+    title: "$4 off $16+ on Uber Eats pickup",
+    how: "Uber Eats app or site, switch to Pickup. Seen in your signed-in pickup feed; offer may apply to select items only",
+    value: 0.25, end: "2026-11-20", verified: false,
+    source: "https://www.ubereats.com/feed?diningMode=PICKUP"
   }
 ];
 
@@ -131,7 +230,19 @@ window.CHAINS = {
   "Taco Bell": { re: /taco bell/i, cuisine: "mexican" },
   "Tropical Smoothie": { re: /tropical smoothie/i, cuisine: "smoothie" },
   "Wendy's": { re: /wendy'?s/i, cuisine: "burgers" },
-  "Zaxby's": { re: /zaxby'?s/i, cuisine: "chicken" }
+  "Zaxby's": { re: /zaxby'?s/i, cuisine: "chicken" },
+  // Local spots and extra chains with signed-in app offers
+  "PITA Mediterranean Street Food": { re: /^pita mediterranean/i, cuisine: "mediterranean" },
+  "Mediterranean Grill": { re: /^mediterranean grill/i, cuisine: "mediterranean" },
+  "Lavash": { re: /^lavash\b/i, cuisine: "mediterranean" },
+  "Delbar": { re: /^delbar\b/i, cuisine: "mediterranean" },
+  "Rreal Tacos": { re: /rreal tacos/i, cuisine: "mexican" },
+  "Tacos La Villa": { re: /tacos la villa/i, cuisine: "mexican" },
+  "Goldberg's": { re: /goldberg'?s/i, cuisine: "breakfast" },
+  "Jimmy John's": { re: /jimmy john'?s/i, cuisine: "subs" },
+  "Panera": { re: /^panera\b/i, cuisine: "sitdown" },
+  "Papa Johns": { re: /papa john'?s/i, cuisine: "pizza" },
+  "Dunkin'": { re: /^dunkin/i, cuisine: "coffee" }
 };
 
 window.MED_RE = {
