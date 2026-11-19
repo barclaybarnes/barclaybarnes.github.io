@@ -4,7 +4,7 @@
 // value = old fallback (0 to 1), used at half weight only when save is missing.
 // windows: when the deal runs. days: 0=Sun..6=Sat. from/to: local hour (24h). No windows = any time.
 // verified: false when the terms came from a headline or summary and need checking in the app.
-window.DEALS_CHECKED = "2026-11-18";
+window.DEALS_CHECKED = "2026-11-19";
 window.DEALS = [
   {
     id: "shakeshack-bogo", item: "Single ShackBurger (second one free)", save: 7.0, chain: "Shake Shack", cuisine: "burgers",
@@ -103,6 +103,34 @@ window.DEALS = [
     how: "Hardee's app",
     value: 0.5, start: "2026-12-01", verified: true,
     source: "https://www.mealslash.com/deals/this-week"
+  },
+  {
+    id: "dominos-carryout", item: "Any 1-topping pizza (not XL), or 8-piece wings or boneless chicken, for $7.99", save: 6.0, chain: "Domino's", cuisine: "pizza",
+    title: "Carryout special: 1-topping pizza or 8-piece wings for $7.99",
+    how: "Order carryout in the Domino's app or online. Some stores charge $8.99. No end date listed",
+    value: 0.4, verified: false,
+    source: "https://www.brandeating.com/p/current-menu-promotions.html"
+  },
+  {
+    id: "papajohns-50off", item: "Regular menu-priced pizzas, half off", save: 7.0, chain: "Papa Johns", cuisine: "pizza",
+    title: "50% off regular menu-priced pizzas for carryout",
+    how: "Papa Johns app or website, carryout. Rotating codes that vary by market (e.g. MT50); check the app's Deals page",
+    value: 0.5, end: "2026-11-30", verified: false,
+    source: "https://fabulesslyfrugal.com/deals/dining-deals/"
+  },
+  {
+    id: "jj-app20", item: "Whole app order, 20% off", save: 2.5, chain: "Jimmy John's", cuisine: "subs",
+    title: "20% off app orders",
+    code: "APP20", how: "Jimmy John's app, choose pickup. No end date listed",
+    value: 0.2, verified: false,
+    source: "https://fabulesslyfrugal.com/deals/dining-deals/"
+  },
+  {
+    id: "jm-giant-half", item: "One Giant sub, half off", save: 9.0, chain: "Jersey Mike's", cuisine: "subs",
+    title: "50% off a Giant sub for MyMike's members",
+    how: "Jersey Mike's app, MyMike's Rewards. Check the Offers tab, it may be targeted. No end date listed",
+    value: 0.5, verified: false,
+    source: "https://fabulesslyfrugal.com/deals/dining-deals/"
   },
   // ---- Signed-in app offers (Uber Eats pickup feed, item prices read from each store page). Refreshed daily at 7:34 AM ET. ----
   {
