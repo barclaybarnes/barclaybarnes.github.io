@@ -4,7 +4,7 @@
 // value = old fallback (0 to 1), used at half weight only when save is missing.
 // windows: when the deal runs. days: 0=Sun..6=Sat. from/to: local hour (24h). No windows = any time.
 // verified: false when the terms came from a headline or summary and need checking in the app.
-window.DEALS_CHECKED = "2026-11-19";
+window.DEALS_CHECKED = "2026-11-20";
 window.DEALS = [
   {
     id: "shakeshack-bogo", item: "Single ShackBurger (second one free)", save: 7.0, chain: "Shake Shack", cuisine: "burgers",
@@ -131,6 +131,62 @@ window.DEALS = [
     how: "Jersey Mike's app, MyMike's Rewards. Check the Offers tab, it may be targeted. No end date listed",
     value: 0.5, verified: false,
     source: "https://fabulesslyfrugal.com/deals/dining-deals/"
+  },
+  {
+    id: "wendys-wed-nuggets", item: "6-piece chicken nuggets", save: 3.0, chain: "Wendy's", cuisine: "chicken",
+    title: "Nugget Wednesdays: free 6-piece nuggets with a $5+ purchase",
+    how: "Wendy's app, Rewards offer. No end date listed",
+    value: 0.3, windows: [{ days: [3] }], verified: false,
+    source: "https://www.brandeating.com/p/current-menu-promotions.html"
+  },
+  {
+    id: "wendys-fri-fries", item: "Fries (free with a $5+ purchase)", save: 2.8, chain: "Wendy's", cuisine: "burgers",
+    title: "Fry Fridays: free fries with a $5+ purchase",
+    how: "Wendy's app, Rewards offer. No end date listed",
+    value: 0.25, windows: [{ days: [5] }], verified: false,
+    source: "https://www.brandeating.com/p/current-menu-promotions.html"
+  },
+  {
+    id: "wendys-chili", item: "Small chili", save: 2.9, chain: "Wendy's", cuisine: "burgers",
+    title: "Free small chili with a $5+ purchase",
+    how: "Wendy's app, Rewards offer. No end date listed",
+    value: 0.25, verified: false,
+    source: "https://www.brandeating.com/p/current-menu-promotions.html"
+  },
+  {
+    id: "wendys-3off20", item: "Whole order of $20+", save: 3.0, chain: "Wendy's", cuisine: "burgers",
+    title: "$3 off a $20+ purchase",
+    how: "Wendy's app, Rewards offer. No end date listed",
+    value: 0.15, verified: false,
+    source: "https://www.brandeating.com/p/current-menu-promotions.html"
+  },
+  {
+    id: "bk-fries", item: "Fries (free with a $3+ purchase)", save: 3.0, chain: "Burger King", cuisine: "burgers",
+    title: "Free fries with a $3+ purchase, once a week",
+    how: "Burger King app, Royal Perks members. No end date listed",
+    value: 0.3, verified: false,
+    source: "https://www.brandeating.com/p/current-menu-promotions.html"
+  },
+  {
+    id: "papajohns-bogo-large", item: "Second large 1-topping pizza free with a regular-price large", save: 13.0, chain: "Papa Johns", cuisine: "pizza",
+    title: "Buy a large pizza at menu price, get a large 1-topping free",
+    how: "Papa Johns app or website, choose carryout. Terms and end date not confirmed",
+    value: 0.5, verified: false,
+    source: "https://www.brandeating.com/p/current-menu-promotions.html"
+  },
+  {
+    id: "tacobell-happier-hour", item: "Medium fountain drink or Freeze for $1", save: 2.0, chain: "Taco Bell", cuisine: "mexican",
+    title: "Happier Hour: $1 medium drink or Freeze, 2 to 5 PM",
+    how: "Taco Bell app or in store, 2 to 5 PM. No end date listed",
+    value: 0.2, windows: [{ days: [0, 1, 2, 3, 4, 5, 6], from: 14, to: 17 }], verified: false,
+    source: "https://www.brandeating.com/p/current-menu-promotions.html"
+  },
+  {
+    id: "dunkin-6meal", item: "Bacon, Egg & Cheese, hash browns and a medium coffee for $6", save: 3.0, chain: "Dunkin'", cuisine: "coffee",
+    title: "$6 Meal Deal: Bacon, Egg & Cheese, hash browns and medium coffee",
+    how: "Dunkin' app or in store. No end date listed",
+    value: 0.3, verified: false,
+    source: "https://www.brandeating.com/p/current-menu-promotions.html"
   },
   // ---- Signed-in app offers (Uber Eats pickup feed, item prices read from each store page). Refreshed daily at 7:34 AM ET. ----
   {
