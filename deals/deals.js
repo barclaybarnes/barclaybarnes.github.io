@@ -4,7 +4,7 @@
 // value = old fallback (0 to 1), used at half weight only when save is missing.
 // windows: when the deal runs. days: 0=Sun..6=Sat. from/to: local hour (24h). No windows = any time.
 // verified: false when the terms came from a headline or summary and need checking in the app.
-window.DEALS_CHECKED = "2026-11-20";
+window.DEALS_CHECKED = "2026-11-21";
 window.DEALS = [
   {
     id: "shakeshack-bogo", item: "Single ShackBurger (second one free)", save: 7.0, chain: "Shake Shack", cuisine: "burgers",
@@ -68,13 +68,6 @@ window.DEALS = [
     how: "McDonald's app, Rewards. Not valid on McDelivery",
     value: 0.4, end: "2026-12-31", verified: false,
     source: "https://dealsfinders.com/fastfood-coupons/"
-  },
-  {
-    id: "bk-advent", item: "Changes daily, shown only in the app", chain: "Burger King", cuisine: "burgers",
-    title: "Holiday advent calendar: a new app deal each day",
-    how: "Burger King app. Today's offer is only shown in the app",
-    value: 0.3, end: "2026-11-20", verified: false,
-    source: "https://www.mealslash.com/deals/this-week"
   },
   {
     id: "kk-thanksgiving", item: "One Thanksgiving doughnut", save: 2.0, chain: "Krispy Kreme", cuisine: "dessert",
@@ -188,98 +181,49 @@ window.DEALS = [
     value: 0.3, verified: false,
     source: "https://www.brandeating.com/p/current-menu-promotions.html"
   },
+  {
+    id: "kk-5dozen", item: "Second Original Glazed dozen for $5 when you buy a dozen", save: 13.0, chain: "Krispy Kreme", cuisine: "dessert",
+    title: "$5 Original Glazed dozen with the purchase of any dozen",
+    code: "BOGO5", how: "In shop (scan the barcode) or online order for pickup with code BOGO5. Also counts with 16-count Minis",
+    value: 0.5, start: "2026-11-20", end: "2026-11-22", verified: false,
+    source: "https://dealsfinders.com/fastfood-coupons/"
+  },
+  {
+    id: "chipotle-bogo-1125", item: "Second entree free (buy one entree)", save: 11.0, chain: "Chipotle", cuisine: "mexican",
+    title: "Buy one entree, get one free for Rewards members, 5 to 9 PM",
+    how: "In the restaurant only: scan your Chipotle Rewards code at the register, 5 to 9 PM local time",
+    value: 0.5, start: "2026-11-25", end: "2026-11-25", windows: [{ days: [3], from: 17, to: 21 }], verified: false,
+    source: "https://www.dealsonmeals.app/national"
+  },
+  {
+    id: "chipotle-fullmoon", item: "Medium queso blanco and chips (free with a full-size entree)", save: 5.5, chain: "Chipotle", cuisine: "mexican",
+    title: "Full Moon deal: free chips and queso with an entree",
+    how: "Chipotle Rewards members. Scan in the restaurant or order in the app or online for pickup. Next date after this is Dec 23",
+    value: 0.35, start: "2026-11-24", end: "2026-11-24", verified: false,
+    source: "https://www.dealsonmeals.app/national"
+  },
+  {
+    id: "subway-2fl-1299", item: "Two footlongs for $12.99 total", save: 9.0, chain: "Subway", cuisine: "subs",
+    title: "2 footlongs for $12.99",
+    code: "1299FL", how: "Subway app or website, Sub Club members. End date estimated from a countdown",
+    value: 0.4, end: "2026-12-03", verified: false,
+    source: "https://www.dealsonmeals.app/national"
+  },
+  {
+    id: "subway-fl-699", item: "One footlong for $6.99", save: 4.0, chain: "Subway", cuisine: "subs",
+    title: "Any footlong for $6.99",
+    code: "FOOTLONG699", how: "Subway app or website, Sub Club members. End date estimated from a countdown",
+    value: 0.35, end: "2026-12-03", verified: false,
+    source: "https://www.dealsonmeals.app/national"
+  },
+  {
+    id: "dunkin-wed-donut", item: "One classic donut (free with a full-price medium or larger drink)", save: 1.8, chain: "Dunkin'", cuisine: "coffee",
+    title: "Free classic donut with a medium drink on Wednesdays",
+    how: "Dunkin' app, weekly Rewards offer in the Offers tab",
+    value: 0.2, end: "2027-02-28", windows: [{ days: [3] }], verified: false,
+    source: "https://dealsfinders.com/fastfood-coupons/"
+  },
   // ---- Signed-in app offers (Uber Eats pickup feed, item prices read from each store page). Refreshed daily at 7:34 AM ET. ----
-  {
-    id: "ue-pita-med-bogo", item: "3 Mini Pitas $17 or Signature Platter $19.50 (also Greek Fries $11)", save: 17.0, chain: "PITA Mediterranean Street Food", cuisine: "mediterranean",
-    title: "Buy one, get one free on Signature Platter, 3 Mini Pitas or Greek Fries",
-    how: "Uber Eats app or site, switch to Pickup and add the item from the store page",
-    value: 0.5, end: "2026-11-20", verified: true,
-    source: "https://www.ubereats.com/feed?diningMode=PICKUP"
-  },
-  {
-    id: "ue-med-grill-bogo", item: "Gyro Sandwich Combo $10.35 (also Hummus $6.32)", save: 10.35, chain: "Mediterranean Grill", cuisine: "mediterranean",
-    title: "Buy one, get one free on the Gyro Sandwich Combo or Hummus",
-    how: "Uber Eats app or site, switch to Pickup and add the item from the store page",
-    value: 0.5, end: "2026-11-20", verified: true,
-    source: "https://www.ubereats.com/feed?diningMode=PICKUP"
-  },
-  {
-    id: "ue-delbar-bogo", item: "Falafel $21.24, Koobideh $22.42, Joojeh or Lamb & Labneh $24.78 sandwich", save: 21.24, chain: "Delbar", cuisine: "mediterranean",
-    title: "Buy one, get one free on sandwiches",
-    how: "Uber Eats app or site, switch to Pickup and add the item from the store page",
-    value: 0.5, end: "2026-11-20", verified: true,
-    source: "https://www.ubereats.com/feed?diningMode=PICKUP"
-  },
-  {
-    id: "ue-lavash-free-hummus", item: "Buy Chicken Soltani Plate $22.50, get Hummus ($8) free", save: 8.0, chain: "Lavash", cuisine: "mediterranean",
-    title: "Free hummus with a Chicken Soltani Plate",
-    how: "Uber Eats app or site, switch to Pickup and add the item from the store page",
-    value: 0.3, end: "2026-11-20", verified: true,
-    source: "https://www.ubereats.com/feed?diningMode=PICKUP"
-  },
-  {
-    id: "ue-popeyes-bogo", item: "Classic Chicken Sandwich $6.86 or Spicy $7.09 (also 12pc wings $17.36, wraps, Coke)", save: 6.86, chain: "Popeyes", cuisine: "chicken",
-    title: "Buy one, get one free on chicken sandwiches, wings and wraps",
-    how: "Uber Eats app or site, switch to Pickup and add the item from the store page",
-    value: 0.5, end: "2026-11-20", verified: true,
-    source: "https://www.ubereats.com/feed?diningMode=PICKUP"
-  },
-  {
-    id: "ue-tropical-bogo", item: "Three Cheese Chicken 'Dilla $9.19 or Acai Bowl $13.69 (smoothies not included)", save: 9.19, chain: "Tropical Smoothie", cuisine: "smoothie",
-    title: "Buy one, get one free on acai bowls and the Three Cheese Chicken 'Dilla",
-    how: "Uber Eats app or site, switch to Pickup and add the item from the store page",
-    value: 0.5, end: "2026-11-20", verified: true,
-    source: "https://www.ubereats.com/feed?diningMode=PICKUP"
-  },
-  {
-    id: "ue-firehouse-20off", item: "Club On A Sub $15.90 to $12.72, Steak & Cheese Melt $17.55 to $14.04", save: 3.18, chain: "Firehouse Subs", cuisine: "subs",
-    title: "20% off select large subs",
-    how: "Uber Eats app or site, switch to Pickup and add the item from the store page",
-    value: 0.2, end: "2026-11-20", verified: true,
-    source: "https://www.ubereats.com/feed?diningMode=PICKUP"
-  },
-  {
-    id: "ue-rreal-bogo", item: "Single taco: Grilled Chicken or Al Pastor $5.94, Asada $7.49 (also Rreal Nachos $21.25)", save: 5.94, chain: "Rreal Tacos", cuisine: "mexican",
-    title: "Buy one, get one free on single tacos, nachos and the Trio",
-    how: "Uber Eats app or site, switch to Pickup and add the item from the store page",
-    value: 0.5, end: "2026-11-20", verified: true,
-    source: "https://www.ubereats.com/feed?diningMode=PICKUP"
-  },
-  {
-    id: "ue-lavilla-bogo", item: "Regular Burrito $10.99, Taco Plate $11.99, Birria tacos + consome $13.99", save: 10.99, chain: "Tacos La Villa", cuisine: "mexican",
-    title: "Buy one, get one free on plates, burritos and nachos",
-    how: "Uber Eats app or site, switch to Pickup and add the item from the store page",
-    value: 0.5, end: "2026-11-20", verified: true,
-    source: "https://www.ubereats.com/feed?diningMode=PICKUP"
-  },
-  {
-    id: "ue-goldbergs-bogo", item: "Egg & Cheese on a Bagel $10.80 or Egg, Meat & Cheese $13.35 (also soup $9.20, plain bagel $2.96)", save: 10.8, chain: "Goldberg's", cuisine: "breakfast",
-    title: "Buy one, get one free on bagel sandwiches and soup",
-    how: "Uber Eats app or site, switch to Pickup and add the item from the store page",
-    value: 0.5, end: "2026-11-20", verified: true,
-    source: "https://www.ubereats.com/feed?diningMode=PICKUP"
-  },
-  {
-    id: "ue-panera-free-soup", item: "Buy a sandwich (Tuna $8.69, Frontega or Bravo $10.69), get a soup ($8.09) free", save: 8.09, chain: "Panera", cuisine: "sitdown",
-    title: "Free bowl of soup with a sandwich",
-    how: "Uber Eats app or site, switch to Pickup and add the item from the store page",
-    value: 0.4, end: "2026-11-20", verified: true,
-    source: "https://www.ubereats.com/feed?diningMode=PICKUP"
-  },
-  {
-    id: "ue-papajohns-bogo", item: "Cheese or Create Your Own $12.79, Pepperoni $13.09, Grand Papa $23.09", save: 12.79, chain: "Papa Johns", cuisine: "pizza",
-    title: "Buy one, get one free on large pizzas",
-    how: "Uber Eats app or site, switch to Pickup and add the item from the store page",
-    value: 0.5, end: "2026-11-20", verified: true,
-    source: "https://www.ubereats.com/feed?diningMode=PICKUP"
-  },
-  {
-    id: "ue-jimmyjohns-bogo", item: "Chips $2.29 or cookies $2.79 (not sandwiches)", save: 2.29, chain: "Jimmy John's", cuisine: "subs",
-    title: "Buy one, get one free on chips, cookies and brownies only",
-    how: "Uber Eats app or site, switch to Pickup and add the item from the store page",
-    value: 0.1, end: "2026-11-20", verified: true,
-    source: "https://www.ubereats.com/feed?diningMode=PICKUP"
-  }
 ];
 
 // How to recognize each chain in map data, and its cuisine.
