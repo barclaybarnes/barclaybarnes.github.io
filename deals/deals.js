@@ -4,7 +4,7 @@
 // value = old fallback (0 to 1), used at half weight only when save is missing.
 // windows: when the deal runs. days: 0=Sun..6=Sat. from/to: local hour (24h). No windows = any time.
 // verified: false when the terms came from a headline or summary and need checking in the app.
-window.DEALS_CHECKED = "2026-11-21";
+window.DEALS_CHECKED = "2026-11-22";
 window.DEALS = [
   {
     id: "shakeshack-bogo", item: "Single ShackBurger (second one free)", save: 7.0, chain: "Shake Shack", cuisine: "burgers",
@@ -222,6 +222,13 @@ window.DEALS = [
     how: "Dunkin' app, weekly Rewards offer in the Offers tab",
     value: 0.2, end: "2027-02-28", windows: [{ days: [3] }], verified: false,
     source: "https://dealsfinders.com/fastfood-coupons/"
+  },
+  {
+    id: "tsc-buy2get1", item: "Third smoothie free when you buy two", save: 7.0, chain: "Tropical Smoothie", cuisine: "smoothie",
+    title: "Buy 2 smoothies, get 1 free",
+    how: "Tropical Smoothie Cafe app, order for pickup. Check the app's Offers tab. No end date listed",
+    value: 0.33, verified: false,
+    source: "https://www.mealslash.com/deals/this-week"
   },
   // ---- Signed-in app offers (Uber Eats pickup feed, item prices read from each store page). Refreshed daily at 7:34 AM ET. ----
 ];
