@@ -4,7 +4,7 @@
 // value = old fallback (0 to 1), used at half weight only when save is missing.
 // windows: when the deal runs. days: 0=Sun..6=Sat. from/to: local hour (24h). No windows = any time.
 // verified: false when the terms came from a headline or summary and need checking in the app.
-window.DEALS_CHECKED = "2026-11-22";
+window.DEALS_CHECKED = "2026-11-23";
 window.DEALS = [
   {
     id: "shakeshack-bogo", item: "Single ShackBurger (second one free)", save: 7.0, chain: "Shake Shack", cuisine: "burgers",
@@ -40,13 +40,6 @@ window.DEALS = [
     code: "FOXBIGNOON", how: "Wendy's app, Rewards members, once a week",
     value: 0.3, end: "2026-12-04", verified: true,
     source: "https://sporked.com/article/every-fast-food-deal-this-week-9/"
-  },
-  {
-    id: "moes-dipper", item: "Birria Grilled Burrito Dipper", save: 5.0, chain: "Moe's", cuisine: "mexican",
-    title: "Free Birria Grilled Burrito Dipper with any purchase",
-    how: "Moe's app, Moe Rewards members",
-    value: 0.4, end: "2026-11-22", verified: true,
-    source: "https://www.mealslash.com/deals/this-week"
   },
   {
     id: "popeyes-wings", item: "6-piece wings", save: 7.5, chain: "Popeyes", cuisine: "chicken",
@@ -182,13 +175,6 @@ window.DEALS = [
     source: "https://www.brandeating.com/p/current-menu-promotions.html"
   },
   {
-    id: "kk-5dozen", item: "Second Original Glazed dozen for $5 when you buy a dozen", save: 13.0, chain: "Krispy Kreme", cuisine: "dessert",
-    title: "$5 Original Glazed dozen with the purchase of any dozen",
-    code: "BOGO5", how: "In shop (scan the barcode) or online order for pickup with code BOGO5. Also counts with 16-count Minis",
-    value: 0.5, start: "2026-11-20", end: "2026-11-22", verified: false,
-    source: "https://dealsfinders.com/fastfood-coupons/"
-  },
-  {
     id: "chipotle-bogo-1125", item: "Second entree free (buy one entree)", save: 11.0, chain: "Chipotle", cuisine: "mexican",
     title: "Buy one entree, get one free for Rewards members, 5 to 9 PM",
     how: "In the restaurant only: scan your Chipotle Rewards code at the register, 5 to 9 PM local time",
@@ -229,6 +215,20 @@ window.DEALS = [
     how: "Tropical Smoothie Cafe app, order for pickup. Check the app's Offers tab. No end date listed",
     value: 0.33, verified: false,
     source: "https://www.mealslash.com/deals/this-week"
+  },
+  {
+    id: "moes-bogo-bf", item: "Second entree free (buy one entree)", save: 11.0, chain: "Moe's", cuisine: "mexican",
+    title: "Black Friday weekend: buy one entree, get one free for Moe Rewards members",
+    how: "Moe's app or website, order for pickup, Moe Rewards members. Nov 27 to 29. No minimum or code listed",
+    value: 0.5, start: "2026-11-27", end: "2026-11-29", verified: false,
+    source: "https://thefreebieguy.com/black-friday-freebies-deals/"
+  },
+  {
+    id: "jm-2off-email", item: "One Regular or Giant sub, $2 off", save: 2.0, chain: "Jersey Mike's", cuisine: "subs",
+    title: "$2 off a Regular or Giant sub with an Email and Text Club code",
+    how: "Promo code sent to Jersey Mike's Email and Text Club members in MyMike's. Use in the app or online for pickup",
+    value: 0.15, end: "2027-02-28", verified: false,
+    source: "https://dealsfinders.com/fastfood-coupons/"
   },
   // ---- Signed-in app offers (Uber Eats pickup feed, item prices read from each store page). Refreshed daily at 7:34 AM ET. ----
 ];
