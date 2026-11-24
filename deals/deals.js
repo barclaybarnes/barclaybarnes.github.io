@@ -4,7 +4,7 @@
 // value = old fallback (0 to 1), used at half weight only when save is missing.
 // windows: when the deal runs. days: 0=Sun..6=Sat. from/to: local hour (24h). No windows = any time.
 // verified: false when the terms came from a headline or summary and need checking in the app.
-window.DEALS_CHECKED = "2026-11-23";
+window.DEALS_CHECKED = "2026-11-24";
 window.DEALS = [
   {
     id: "shakeshack-bogo", item: "Single ShackBurger (second one free)", save: 7.0, chain: "Shake Shack", cuisine: "burgers",
@@ -60,13 +60,6 @@ window.DEALS = [
     title: "Free medium fries with a $1+ purchase, once a week",
     how: "McDonald's app, Rewards. Not valid on McDelivery",
     value: 0.4, end: "2026-12-31", verified: false,
-    source: "https://dealsfinders.com/fastfood-coupons/"
-  },
-  {
-    id: "kk-thanksgiving", item: "One Thanksgiving doughnut", save: 2.0, chain: "Krispy Kreme", cuisine: "dessert",
-    title: "Free Thanksgiving doughnut with any purchase",
-    how: "In shop. Terms not confirmed",
-    value: 0.3, start: "2026-11-17", end: "2026-11-23", verified: false,
     source: "https://dealsfinders.com/fastfood-coupons/"
   },
   {
@@ -212,8 +205,8 @@ window.DEALS = [
   {
     id: "tsc-buy2get1", item: "Third smoothie free when you buy two", save: 7.0, chain: "Tropical Smoothie", cuisine: "smoothie",
     title: "Buy 2 smoothies, get 1 free",
-    how: "Tropical Smoothie Cafe app, order for pickup. Check the app's Offers tab. No end date listed",
-    value: 0.33, verified: false,
+    how: "Tropical Smoothie Cafe app (Tropic Mode offer), order for pickup. Check the app's Offers tab",
+    value: 0.33, end: "2026-11-30", verified: false,
     source: "https://www.mealslash.com/deals/this-week"
   },
   {
@@ -229,6 +222,13 @@ window.DEALS = [
     how: "Promo code sent to Jersey Mike's Email and Text Club members in MyMike's. Use in the app or online for pickup",
     value: 0.15, end: "2027-02-28", verified: false,
     source: "https://dealsfinders.com/fastfood-coupons/"
+  },
+  {
+    id: "bk-bogo-ocs", item: "Second Original Chicken Sandwich free (buy one)", save: 6.0, chain: "Burger King", cuisine: "burgers",
+    title: "Buy one Original Chicken Sandwich, get one free",
+    how: "Burger King app or website, Royal Perks offer, order for pickup. Terms from a summary only; check the app's Offers tab",
+    value: 0.5, end: "2026-11-29", verified: false,
+    source: "https://www.mealslash.com/deals/this-week"
   },
   // ---- Signed-in app offers (Uber Eats pickup feed, item prices read from each store page). Refreshed daily at 7:34 AM ET. ----
 ];
