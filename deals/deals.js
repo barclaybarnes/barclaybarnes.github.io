@@ -4,7 +4,7 @@
 // value = old fallback (0 to 1), used at half weight only when save is missing.
 // windows: when the deal runs. days: 0=Sun..6=Sat. from/to: local hour (24h). No windows = any time.
 // verified: false when the terms came from a headline or summary and need checking in the app.
-window.DEALS_CHECKED = "2026-11-24";
+window.DEALS_CHECKED = "2026-11-25";
 window.DEALS = [
   {
     id: "shakeshack-bogo", item: "Single ShackBurger (second one free)", save: 7.0, chain: "Shake Shack", cuisine: "burgers",
@@ -163,8 +163,8 @@ window.DEALS = [
   {
     id: "dunkin-6meal", item: "Bacon, Egg & Cheese, hash browns and a medium coffee for $6", save: 3.0, chain: "Dunkin'", cuisine: "coffee",
     title: "$6 Meal Deal: Bacon, Egg & Cheese, hash browns and medium coffee",
-    how: "Dunkin' app or in store. No end date listed",
-    value: 0.3, verified: false,
+    how: "Dunkin' app or in store. Runs through Dec 29",
+    value: 0.3, end: "2026-12-29", verified: false,
     source: "https://www.brandeating.com/p/current-menu-promotions.html"
   },
   {
@@ -172,13 +172,6 @@ window.DEALS = [
     title: "Buy one entree, get one free for Rewards members, 5 to 9 PM",
     how: "In the restaurant only: scan your Chipotle Rewards code at the register, 5 to 9 PM local time",
     value: 0.5, start: "2026-11-25", end: "2026-11-25", windows: [{ days: [3], from: 17, to: 21 }], verified: false,
-    source: "https://www.dealsonmeals.app/national"
-  },
-  {
-    id: "chipotle-fullmoon", item: "Medium queso blanco and chips (free with a full-size entree)", save: 5.5, chain: "Chipotle", cuisine: "mexican",
-    title: "Full Moon deal: free chips and queso with an entree",
-    how: "Chipotle Rewards members. Scan in the restaurant or order in the app or online for pickup. Next date after this is Dec 23",
-    value: 0.35, start: "2026-11-24", end: "2026-11-24", verified: false,
     source: "https://www.dealsonmeals.app/national"
   },
   {
@@ -229,6 +222,48 @@ window.DEALS = [
     how: "Burger King app or website, Royal Perks offer, order for pickup. Terms from a summary only; check the app's Offers tab",
     value: 0.5, end: "2026-11-29", verified: false,
     source: "https://www.mealslash.com/deals/this-week"
+  },
+  {
+    id: "bk-bf-free-sandwich", item: "One sandwich: Cheeseburger, Original Chicken Sandwich or Croissan'wich (free with $5+)", save: 6.0, chain: "Burger King", cuisine: "burgers",
+    title: "Black Friday weekend: free Original Chicken Sandwich, Cheeseburger or Croissan'wich with $5+",
+    how: "Burger King app or website, Royal Perks members, order for pickup. One per day, Nov 27 to 30",
+    value: 0.45, start: "2026-11-27", end: "2026-11-30", verified: false,
+    source: "https://spoonuniversity.com/news/black-friday-fast-food-deals-2026/"
+  },
+  {
+    id: "tacobell-chalupa-1", item: "Chalupa Supreme for $1 (with a $15+ app order)", save: 4.0, chain: "Taco Bell", cuisine: "mexican",
+    title: "$1 Chalupa Supreme with a $15+ app order",
+    how: "Taco Bell app, Rewards members, order for pickup. Once per member",
+    value: 0.2, end: "2026-12-04", verified: false,
+    source: "https://sporked.com/article/every-fast-food-deal-this-week-10/"
+  },
+  {
+    id: "kk-1-dozen", item: "Second dozen Original Glazed for $1 (buy a regular-price dozen or 16 Minis)", save: 13.0, chain: "Krispy Kreme", cuisine: "dessert",
+    title: "$1 dozen Original Glazed with a regular-price dozen",
+    how: "Krispy Kreme Rewards members, in the app, online for pickup or in shop",
+    value: 0.5, end: "2026-11-29", verified: false,
+    source: "https://sporked.com/article/every-fast-food-deal-this-week-10/"
+  },
+  {
+    id: "dunkin-fri-donut", item: "One classic donut (free with a drink)", save: 1.8, chain: "Dunkin'", cuisine: "coffee",
+    title: "Free classic donut with a drink on Fridays, starting Black Friday",
+    how: "Dunkin' app, Rewards offer. Starts Nov 27 and repeats Fridays; end date not listed",
+    value: 0.2, start: "2026-11-27", windows: [{ days: [5] }], verified: false,
+    source: "https://spoonuniversity.com/news/black-friday-fast-food-deals-2026/"
+  },
+  {
+    id: "panera-baguette", item: "French baguette (free with any in-cafe purchase)", save: 3.5, chain: "Panera", cuisine: "sitdown",
+    title: "Free baguette with any in-cafe purchase, Thanksgiving Eve",
+    how: "In the cafe only, from 11 AM local time, while supplies last. Only select Panera locations take part",
+    value: 0.25, start: "2026-11-25", end: "2026-11-25", windows: [{ days: [3], from: 11, to: 24 }], verified: false,
+    source: "https://sporked.com/article/every-fast-food-deal-this-week-10/"
+  },
+  {
+    id: "popeyes-12for12", item: "12 bone-in or boneless wings, or 12 tenders, for $12", save: 6.0, chain: "Popeyes", cuisine: "chicken",
+    title: "12 wings or tenders for $12",
+    how: "Popeyes app or website, Rewards members, order for pickup. No end date listed",
+    value: 0.35, verified: false,
+    source: "https://sporked.com/article/every-fast-food-deal-this-week-10/"
   },
   // ---- Signed-in app offers (Uber Eats pickup feed, item prices read from each store page). Refreshed daily at 7:34 AM ET. ----
 ];
