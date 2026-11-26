@@ -4,7 +4,7 @@
 // value = old fallback (0 to 1), used at half weight only when save is missing.
 // windows: when the deal runs. days: 0=Sun..6=Sat. from/to: local hour (24h). No windows = any time.
 // verified: false when the terms came from a headline or summary and need checking in the app.
-window.DEALS_CHECKED = "2026-11-25";
+window.DEALS_CHECKED = "2026-11-26";
 window.DEALS = [
   {
     id: "shakeshack-bogo", item: "Single ShackBurger (second one free)", save: 7.0, chain: "Shake Shack", cuisine: "burgers",
@@ -168,13 +168,6 @@ window.DEALS = [
     source: "https://www.brandeating.com/p/current-menu-promotions.html"
   },
   {
-    id: "chipotle-bogo-1125", item: "Second entree free (buy one entree)", save: 11.0, chain: "Chipotle", cuisine: "mexican",
-    title: "Buy one entree, get one free for Rewards members, 5 to 9 PM",
-    how: "In the restaurant only: scan your Chipotle Rewards code at the register, 5 to 9 PM local time",
-    value: 0.5, start: "2026-11-25", end: "2026-11-25", windows: [{ days: [3], from: 17, to: 21 }], verified: false,
-    source: "https://www.dealsonmeals.app/national"
-  },
-  {
     id: "subway-2fl-1299", item: "Two footlongs for $12.99 total", save: 9.0, chain: "Subway", cuisine: "subs",
     title: "2 footlongs for $12.99",
     code: "1299FL", how: "Subway app or website, Sub Club members. End date estimated from a countdown",
@@ -247,16 +240,9 @@ window.DEALS = [
   {
     id: "dunkin-fri-donut", item: "One classic donut (free with a drink)", save: 1.8, chain: "Dunkin'", cuisine: "coffee",
     title: "Free classic donut with a drink on Fridays, starting Black Friday",
-    how: "Dunkin' app, Rewards offer. Starts Nov 27 and repeats Fridays; end date not listed",
-    value: 0.2, start: "2026-11-27", windows: [{ days: [5] }], verified: false,
+    how: "Dunkin' app or scan your Rewards ID, Rewards members. Fridays Nov 27 to Dec 11, participating stores",
+    value: 0.2, start: "2026-11-27", end: "2026-12-11", windows: [{ days: [5] }], verified: false,
     source: "https://spoonuniversity.com/news/black-friday-fast-food-deals-2026/"
-  },
-  {
-    id: "panera-baguette", item: "French baguette (free with any in-cafe purchase)", save: 3.5, chain: "Panera", cuisine: "sitdown",
-    title: "Free baguette with any in-cafe purchase, Thanksgiving Eve",
-    how: "In the cafe only, from 11 AM local time, while supplies last. Only select Panera locations take part",
-    value: 0.25, start: "2026-11-25", end: "2026-11-25", windows: [{ days: [3], from: 11, to: 24 }], verified: false,
-    source: "https://sporked.com/article/every-fast-food-deal-this-week-10/"
   },
   {
     id: "popeyes-12for12", item: "12 bone-in or boneless wings, or 12 tenders, for $12", save: 6.0, chain: "Popeyes", cuisine: "chicken",
@@ -264,6 +250,27 @@ window.DEALS = [
     how: "Popeyes app or website, Rewards members, order for pickup. No end date listed",
     value: 0.35, verified: false,
     source: "https://sporked.com/article/every-fast-food-deal-this-week-10/"
+  },
+  {
+    id: "hardees-5off15", item: "Whole order of $15+", save: 5.0, chain: "Hardee's", cuisine: "burgers",
+    title: "$5 off a $15+ order for My Rewards members",
+    how: "Hardee's app or online, or scan your member QR code in store. One per day, through Nov 30",
+    value: 0.3, end: "2026-11-30", verified: false,
+    source: "https://thefrugaler.com/black-friday-food-deals-2026/"
+  },
+  {
+    id: "shakeshack-truffle", item: "Black Truffle Sauce (free with any purchase)", save: 1.0, chain: "Shake Shack", cuisine: "burgers",
+    title: "Black Friday: free Black Truffle Sauce with any order",
+    code: "TRUFFLE", how: "Shake Shack app, website or in-Shack kiosk. Nov 27 only",
+    value: 0.1, start: "2026-11-27", end: "2026-11-27", verified: false,
+    source: "https://www.foodnetwork.com/fn-dish/news/black-friday-food-deals-roundup-2026"
+  },
+  {
+    id: "chipotle-pga-bogo", item: "Second entree free (buy one entree)", save: 11.0, chain: "Chipotle", cuisine: "mexican",
+    title: "BOGO entree code from PGA TOUR keyword drops",
+    how: "During select PGA TOUR broadcasts, @PGATOUR posts a keyword on X or Instagram; text it to 888222 for a BOGO code. 5,000 codes per drop, while codes last",
+    value: 0.5, end: "2026-12-31", verified: false,
+    source: "https://thekrazycouponlady.com/tips/money/food-deals-near-me"
   },
   // ---- Signed-in app offers (Uber Eats pickup feed, item prices read from each store page). Refreshed daily at 7:34 AM ET. ----
 ];
