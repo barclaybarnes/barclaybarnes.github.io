@@ -4,7 +4,7 @@
 // value = old fallback (0 to 1), used at half weight only when save is missing.
 // windows: when the deal runs. days: 0=Sun..6=Sat. from/to: local hour (24h). No windows = any time.
 // verified: false when the terms came from a headline or summary and need checking in the app.
-window.DEALS_CHECKED = "2026-11-26";
+window.DEALS_CHECKED = "2026-11-27";
 window.DEALS = [
   {
     id: "shakeshack-bogo", item: "Single ShackBurger (second one free)", save: 7.0, chain: "Shake Shack", cuisine: "burgers",
@@ -271,6 +271,13 @@ window.DEALS = [
     how: "During select PGA TOUR broadcasts, @PGATOUR posts a keyword on X or Instagram; text it to 888222 for a BOGO code. 5,000 codes per drop, while codes last",
     value: 0.5, end: "2026-12-31", verified: false,
     source: "https://thekrazycouponlady.com/tips/money/food-deals-near-me"
+  },
+  {
+    id: "subway-bf-bundle-22", item: "Bundle: two footlongs, two 20-oz fountain drinks and six cookies for $22", save: 11.0, chain: "Subway", cuisine: "subs",
+    title: "Black Friday Bundle: 2 footlongs, 2 drinks and 6 cookies for $22",
+    how: "Subway app or website, Sub Club members, order for pickup. One per member, Nov 27 to Dec 6",
+    value: 0.35, start: "2026-11-27", end: "2026-12-06", verified: true,
+    source: "https://thekrazycouponlady.com/tips/money/free-food-on-black-friday"
   },
   // ---- Signed-in app offers (Uber Eats pickup feed, item prices read from each store page). Refreshed daily at 7:34 AM ET. ----
 ];
