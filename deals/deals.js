@@ -4,7 +4,7 @@
 // value = old fallback (0 to 1), used at half weight only when save is missing.
 // windows: when the deal runs. days: 0=Sun..6=Sat. from/to: local hour (24h). No windows = any time.
 // verified: false when the terms came from a headline or summary and need checking in the app.
-window.DEALS_CHECKED = "2026-11-27";
+window.DEALS_CHECKED = "2026-11-28";
 window.DEALS = [
   {
     id: "shakeshack-bogo", item: "Single ShackBurger (second one free)", save: 7.0, chain: "Shake Shack", cuisine: "burgers",
@@ -259,13 +259,6 @@ window.DEALS = [
     source: "https://thefrugaler.com/black-friday-food-deals-2026/"
   },
   {
-    id: "shakeshack-truffle", item: "Black Truffle Sauce (free with any purchase)", save: 1.0, chain: "Shake Shack", cuisine: "burgers",
-    title: "Black Friday: free Black Truffle Sauce with any order",
-    code: "TRUFFLE", how: "Shake Shack app, website or in-Shack kiosk. Nov 27 only",
-    value: 0.1, start: "2026-11-27", end: "2026-11-27", verified: false,
-    source: "https://www.foodnetwork.com/fn-dish/news/black-friday-food-deals-roundup-2026"
-  },
-  {
     id: "chipotle-pga-bogo", item: "Second entree free (buy one entree)", save: 11.0, chain: "Chipotle", cuisine: "mexican",
     title: "BOGO entree code from PGA TOUR keyword drops",
     how: "During select PGA TOUR broadcasts, @PGATOUR posts a keyword on X or Instagram; text it to 888222 for a BOGO code. 5,000 codes per drop, while codes last",
@@ -278,6 +271,20 @@ window.DEALS = [
     how: "Subway app or website, Sub Club members, order for pickup. One per member, Nov 27 to Dec 6",
     value: 0.35, start: "2026-11-27", end: "2026-12-06", verified: true,
     source: "https://thekrazycouponlady.com/tips/money/free-food-on-black-friday"
+  },
+  {
+    id: "kk-12-dozens-bf", item: "Original Glazed or Assorted dozen for $12 each (up to four dozens)", save: 6.5, chain: "Krispy Kreme", cuisine: "dessert",
+    title: "Black Friday weekend: up to 4 dozens for $12 each",
+    how: "Krispy Kreme shop, app or online for pickup. Nov 27 to 29. Redemption details not listed; check the app",
+    value: 0.35, start: "2026-11-27", end: "2026-11-29", verified: false,
+    source: "https://www.brandeating.com/2026/11/2026-black-friday-cyber-monday-deals.html"
+  },
+  {
+    id: "hardees-half-double-cb", item: "Double Cheeseburger, half off", save: 3.2, chain: "Hardee's", cuisine: "burgers",
+    title: "Cyber Monday: half-price Double Cheeseburgers",
+    how: "Hardee's, Nov 30 only. Whether it needs the app or My Rewards is not stated; check the app",
+    value: 0.5, start: "2026-11-30", end: "2026-11-30", verified: false,
+    source: "https://www.brandeating.com/2026/11/2026-black-friday-cyber-monday-deals.html"
   },
   // ---- Signed-in app offers (Uber Eats pickup feed, item prices read from each store page). Refreshed daily at 7:34 AM ET. ----
 ];
